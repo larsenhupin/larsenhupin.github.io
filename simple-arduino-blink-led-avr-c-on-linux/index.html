@@ -7,8 +7,8 @@
 <meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="Simple Arduino Blink LED AVC-C on Linux" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Test" />
-<meta property="og:description" content="Test" />
+<meta name="description" content="Blog about various projects" />
+<meta property="og:description" content="Blog about various projects" />
 <link rel="canonical" href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" />
 <meta property="og:url" content="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" />
 <meta property="og:site_name" content="Sparkland Blog" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Simple Arduino Blink LED AVC-C on Linux" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-17T00:22:04-04:00","datePublished":"2024-08-17T00:22:04-04:00","description":"Test","headline":"Simple Arduino Blink LED AVC-C on Linux","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"},"url":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-17T00:22:04-04:00","datePublished":"2024-08-17T00:22:04-04:00","description":"Blog about various projects","headline":"Simple Arduino Blink LED AVC-C on Linux","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"},"url":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.sparkland.ca/feed.xml" title="Sparkland Blog" /></head>
 <body><header class="site-header" role="banner">
@@ -47,13 +47,47 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Test</p>
+    
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// main.c</span>
 
-<figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="nl">default</span><span class="o">:</span>
-	avr-gcc <span class="nt">-Os</span> <span class="nt">-DF_CPU</span><span class="o">=</span>16000000UL <span class="nt">-mmcu</span><span class="o">=</span>atmega328p <span class="nt">-c</span> <span class="nt">-o</span> led.o led.c
-	avr-gcc <span class="nt">-o</span> led.bin led.o
-	avr-objcopy <span class="nt">-O</span> ihex <span class="nt">-R</span> .eeprom led.bin led.hex
-	<span class="nb">sudo </span>avrdude <span class="nt">-F</span> <span class="nt">-V</span> <span class="nt">-c</span> arduino <span class="nt">-p</span> ATMEGA328P <span class="nt">-P</span> /dev/ttyACM0 <span class="nt">-b</span> 115200 <span class="nt">-U</span> flash:w:led.hex</code></pre></figure>
+<span class="cp">#define F_CPU   16000000UL // Set clock speed
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;avr/io.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;util/delay.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+
+    <span class="c1">// Set PORTB5 as an output</span>
+    <span class="n">DDRB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">DDB5</span><span class="p">);</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="c1">// Set PORTB5</span>
+       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB5</span><span class="p">);</span>
+
+       <span class="c1">// Wait</span>
+       <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
+
+       <span class="c1">// Unset PORTB5</span>
+       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB5</span><span class="p">);</span>
+
+       <span class="c1">// Wait</span>
+       <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
+
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="c"># Makefile
+</span>
+<span class="nl">default</span><span class="o">:</span>
+        <span class="err">avr-gcc</span> <span class="err">-Os</span> <span class="nv">-mmcu</span><span class="o">=</span>atmega328p <span class="nt">-c</span> <span class="nt">-o</span> bin/main.o main.c
+        <span class="err">avr-gcc</span> <span class="err">-o</span> <span class="err">bin/main.bin</span> <span class="err">bin/main.o</span>
+        <span class="err">avr-objcopy</span> <span class="err">-O</span> <span class="err">ihex</span> <span class="err">-R</span> <span class="err">.eeprom</span> <span class="err">bin/main.bin</span> <span class="err">bin/main.hex</span>
+
+<span class="nl">upload</span><span class="o">:</span>
+        <span class="nl">sudo avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash</span><span class="o">:</span><span class="nf">w:main.hex</span></code></pre></figure>
 
 
   </div><a class="u-url" href="/simple-arduino-blink-led-avr-c-on-linux/" hidden></a>
