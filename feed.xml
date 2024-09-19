@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2024-08-20T23:37:32-04:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Simple Arduino Blink LED AVC-C on Linux</title><link href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" rel="alternate" type="text/html" title="Simple Arduino Blink LED AVC-C on Linux" /><published>2024-08-17T00:22:04-04:00</published><updated>2024-08-17T00:22:04-04:00</updated><id>https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux</id><content type="html" xml:base="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"><![CDATA[<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// main.c</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2024-09-19T00:36:07-04:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Simple Arduino Blink LED AVC-C on Linux</title><link href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" rel="alternate" type="text/html" title="Simple Arduino Blink LED AVC-C on Linux" /><published>2024-08-17T00:22:04-04:00</published><updated>2024-08-17T00:22:04-04:00</updated><id>https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux</id><content type="html" xml:base="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"><![CDATA[<h2 id="avr-c">AVR-C</h2>
+<p>Arduino Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic 
+setup and program.</p>
+
+<h2 id="install-packages">Install packages</h2>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>avrdude gcc-avr binutils-avr avr-libc make </code></pre></figure>
+
+<h2 id="program">Program</h2>
+<p>Open Vim or your editor of choice and write the code.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// main.c</span>
 
 <span class="cp">#define F_CPU   16000000UL // Set clock speed
 </span>
@@ -29,6 +41,12 @@
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
+<h2 id="makefile">Makefile</h2>
+
+<p>Makefile is very common tool when programming Arduino in AVR-C.</p>
+
+<p>Alternatively, you can run each command one by one.</p>
+
 <figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="c"># Makefile
 </span>
 <span class="nl">default</span><span class="o">:</span>
@@ -37,4 +55,29 @@
         <span class="err">avr-objcopy</span> <span class="err">-O</span> <span class="err">ihex</span> <span class="err">-R</span> <span class="err">.eeprom</span> <span class="err">bin/main.bin</span> <span class="err">bin/main.hex</span>
 
 <span class="nl">upload</span><span class="o">:</span>
-        <span class="nl">sudo avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash</span><span class="o">:</span><span class="nf">w:main.hex</span></code></pre></figure>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry></feed>
+        <span class="nl">sudo avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash</span><span class="o">:</span><span class="nf">w:main.hex</span></code></pre></figure>
+
+<h2 id="setup-the-breadboard-and-the-arduino">Setup the breadboard and the Arduino</h2>
+<p>I’m using the Arduino UNO R3 with an Atmega328p chip. It probably work on previous version of UNO.</p>
+
+<ul>
+  <li>Wire the  breadboard, the LED and the resistor as seen on the image</li>
+</ul>
+
+<p>image1</p>
+
+<ul>
+  <li>Connect the red wire to PORTB0, the black wire to ground and plug Arduino to the computer using the USB cable.</li>
+</ul>
+
+<h2 id="compile-and-upload">Compile and upload</h2>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make upload</code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="resources">Resources</h2>
+
+<p><a href="https://youtu.be/j4xw8QomkXs?si=07FDPM1oQW1TH6as" target="_blank">Low Level Learning - Getting Started with Baremetal Arduino C Programming</a></p>
+
+<p><a href="https://youtu.be/9ADxPRjZI4Q?si=RwZNeW9FpwtDTmXk" target="_blank">humanHardDrive - Learning AVR-C</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[AVR-C Arduino Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic setup and program.]]></summary></entry></feed>
