@@ -90,11 +90,15 @@ setup and program.</p>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
+<p><br />
+<strong>PORTB0</strong> refers to <strong>PB0</strong> on the pinout image</p>
+
+<p><a href="https://docs.arduino.cc/retired/boards/arduino-uno-rev3-with-long-pins/" target="_blank"><img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux-pinout.jpg" alt="Alt text" style="width: 78%; height: 78%;" /></a></p>
+
 <h2 id="makefile">Makefile</h2>
 
-<p>Makefile is very common tool when programming Arduino in AVR-C.</p>
-
-<p>Alternatively, you can run each command one by one.</p>
+<p>Makefile is very common tool when programming Arduino in AVR-C.
+Alternatively, you can run each command one by one.</p>
 
 <figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="c"># Makefile
 </span>
@@ -111,17 +115,18 @@ setup and program.</p>
 
 <ul>
   <li>Wire the  breadboard, the LED and the resistor as seen on the image</li>
+  <li>Connect the red wire to PORTB0 (D8), the blue wire to ground and plug Arduino to the computer using the USB cable.</li>
 </ul>
 
-<p>image1</p>
+<p><br />
+<img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux.jpg" alt="Alt text" /></p>
 
-<ul>
-  <li>Connect the red wire to PORTB0, the black wire to ground and plug Arduino to the computer using the USB cable.</li>
-</ul>
+<p><br /></p>
 
 <h2 id="compile-and-upload">Compile and upload</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make upload</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make
+make upload</code></pre></figure>
 
 <p><br /></p>
 
