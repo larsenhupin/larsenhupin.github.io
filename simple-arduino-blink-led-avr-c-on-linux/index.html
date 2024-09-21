@@ -7,8 +7,8 @@
 <meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="Simple Arduino Blink LED AVC-C on Linux" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="AVR-C Arduino Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic setup and program." />
-<meta property="og:description" content="AVR-C Arduino Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic setup and program." />
+<meta name="description" content="AVR-C Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic setup and program." />
+<meta property="og:description" content="AVR-C Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic setup and program." />
 <link rel="canonical" href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" />
 <meta property="og:url" content="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" />
 <meta property="og:site_name" content="Sparkland Blog" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Simple Arduino Blink LED AVC-C on Linux" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-17T00:22:04-04:00","datePublished":"2024-08-17T00:22:04-04:00","description":"AVR-C Arduino Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic setup and program.","headline":"Simple Arduino Blink LED AVC-C on Linux","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"},"url":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-17T00:22:04-04:00","datePublished":"2024-08-17T00:22:04-04:00","description":"AVR-C Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic setup and program.","headline":"Simple Arduino Blink LED AVC-C on Linux","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"},"url":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.sparkland.ca/feed.xml" title="Sparkland Blog" /></head>
 <body><header class="site-header" role="banner">
@@ -48,13 +48,17 @@
 
   <div class="post-content e-content" itemprop="articleBody">
     <h2 id="avr-c">AVR-C</h2>
-<p>Arduino Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic 
+<p>Sketch is the absolute fastest way to build anything with Arduino but if you like programming in C this is a basic 
 setup and program.</p>
+
+<p><br /></p>
 
 <h2 id="install-packages">Install packages</h2>
 
 <figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nb">sudo </span>apt update
 <span class="nb">sudo </span>apt <span class="nb">install </span>avrdude gcc-avr binutils-avr avr-libc make </code></pre></figure>
+
+<p><br /></p>
 
 <h2 id="program">Program</h2>
 <p>Open Vim or your editor of choice and write the code.</p>
@@ -67,26 +71,25 @@ setup and program.</p>
 #include</span> <span class="cpf">&lt;util/delay.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
 
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-
-    <span class="c1">// Set PORTB5 as an output</span>
-    <span class="n">DDRB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">DDB5</span><span class="p">);</span>
+    <span class="c1">// Set PORTB0 as an output</span>
+    <span class="n">DDRB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">DDB0</span><span class="p">);</span>
 
     <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="p">{</span>
-       <span class="c1">// Set PORTB5</span>
-       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB5</span><span class="p">);</span>
-
+       <span class="c1">// Set PORTB0</span>
+       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB0</span><span class="p">);</span>
+            
        <span class="c1">// Wait</span>
        <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
 
-       <span class="c1">// Unset PORTB5</span>
-       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB5</span><span class="p">);</span>
+       <span class="c1">// Unset PORTB0</span>
+       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB0</span><span class="p">);</span>
 
        <span class="c1">// Wait</span>
        <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
-
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -95,10 +98,12 @@ setup and program.</p>
 
 <p><a href="https://docs.arduino.cc/retired/boards/arduino-uno-rev3-with-long-pins/" target="_blank"><img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux-pinout.jpg" alt="Alt text" style="width: 78%; height: 78%;" /></a></p>
 
+<p><br /></p>
+
 <h2 id="makefile">Makefile</h2>
 
 <p>Makefile is very common tool when programming Arduino in AVR-C.
-Alternatively, you can run each command one by one.</p>
+Alternatively, you could run each command one by one.</p>
 
 <figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="c"># Makefile
 </span>
@@ -109,6 +114,8 @@ Alternatively, you can run each command one by one.</p>
 
 <span class="nl">upload</span><span class="o">:</span>
         <span class="nl">sudo avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash</span><span class="o">:</span><span class="nf">w:main.hex</span></code></pre></figure>
+
+<p><br /></p>
 
 <h2 id="setup-the-breadboard-and-the-arduino">Setup the breadboard and the Arduino</h2>
 <p>I’m using the Arduino UNO R3 with an Atmega328p chip. It probably work on previous version of UNO.</p>
@@ -125,8 +132,14 @@ Alternatively, you can run each command one by one.</p>
 
 <h2 id="compile-and-upload">Compile and upload</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make
+<p>Start by making a new directory called ‘bin’ in the same location that the ‘main.c’ file than compile with ‘make’ and upload the program to the Atmega328p using ‘make upload’</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>bin
+
+make
 make upload</code></pre></figure>
+
+<p><img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux-terminal.jpg" alt="Alt text" style="width: 120%; height: 120%;" /></p>
 
 <p><br /></p>
 
