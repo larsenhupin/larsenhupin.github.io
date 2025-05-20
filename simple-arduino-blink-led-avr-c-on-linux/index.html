@@ -7,8 +7,8 @@
 <meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="Simple Arduino Blink LED AVC-C on Linux" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="AVR-C If you like programming in C this is a basic setup and program. However, it is worth noting that Sketch is the fastest way to build anything with Arduino" />
-<meta property="og:description" content="AVR-C If you like programming in C this is a basic setup and program. However, it is worth noting that Sketch is the fastest way to build anything with Arduino" />
+<meta name="description" content="AVR-C If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino" />
+<meta property="og:description" content="AVR-C If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino" />
 <link rel="canonical" href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" />
 <meta property="og:url" content="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" />
 <meta property="og:site_name" content="Sparkland Blog" />
@@ -17,9 +17,10 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Simple Arduino Blink LED AVC-C on Linux" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-17T00:22:04-04:00","datePublished":"2024-08-17T00:22:04-04:00","description":"AVR-C If you like programming in C this is a basic setup and program. However, it is worth noting that Sketch is the fastest way to build anything with Arduino","headline":"Simple Arduino Blink LED AVC-C on Linux","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"},"url":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-17T00:22:04-04:00","datePublished":"2024-08-17T00:22:04-04:00","description":"AVR-C If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino","headline":"Simple Arduino Blink LED AVC-C on Linux","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"},"url":"https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://blog.sparkland.ca/feed.xml" title="Sparkland Blog" /></head>
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.sparkland.ca/feed.xml" title="Sparkland Blog" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">Sparkland Blog</a><nav class="site-nav">
@@ -48,8 +49,9 @@
 
   <div class="post-content e-content" itemprop="articleBody">
     <h2 id="avr-c">AVR-C</h2>
-<p>If you like programming in C this is a basic setup and program. However, it is worth noting that Sketch is the fastest way <br />
- to build anything with Arduino</p>
+<p>If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino</p>
+
+<p><br /></p>
 
 <h2 id="install-packages">Install packages</h2>
 
@@ -103,24 +105,24 @@
 <p>Makefile is very common tool when programming Arduino in AVR-C.
 Alternatively, you could run each command one by one</p>
 
-<figure class="highlight"><pre><code class="language-make" data-lang="make"><span class="c"># Makefile
-</span>
-<span class="nl">default</span><span class="o">:</span>
-        <span class="err">avr-gcc</span> <span class="err">-Os</span> <span class="nv">-mmcu</span><span class="o">=</span>atmega328p <span class="nt">-c</span> <span class="nt">-o</span> bin/main.o main.c
-        <span class="err">avr-gcc</span> <span class="err">-o</span> <span class="err">bin/main.bin</span> <span class="err">bin/main.o</span>
-        <span class="err">avr-objcopy</span> <span class="err">-O</span> <span class="err">ihex</span> <span class="err">-R</span> <span class="err">.eeprom</span> <span class="err">bin/main.bin</span> <span class="err">bin/main.hex</span>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># Makefile</span>
 
-<span class="nl">upload</span><span class="o">:</span>
-        <span class="nl">sudo avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash</span><span class="o">:</span><span class="nf">w:main.hex</span></code></pre></figure>
+default:
+        avr-gcc <span class="nt">-Os</span> <span class="nt">-mmcu</span><span class="o">=</span>atmega328p <span class="nt">-c</span> <span class="nt">-o</span> bin/main.o main.c
+        avr-gcc <span class="nt">-o</span> bin/main.bin bin/main.o
+        avr-objcopy <span class="nt">-O</span> ihex <span class="nt">-R</span> .eeprom bin/main.bin bin/main.hex
+
+upload:
+        <span class="nb">sudo </span>avrdude <span class="nt">-F</span> <span class="nt">-V</span> <span class="nt">-c</span> arduino <span class="nt">-p</span> ATMEGA328P <span class="nt">-P</span> /dev/ttyACM0 <span class="nt">-b</span> 115200 <span class="nt">-U</span> flash:w:main.hex</code></pre></figure>
 
 <p><br /></p>
 
 <h2 id="setup-the-breadboard-and-the-arduino">Setup the breadboard and the Arduino</h2>
-<p>I’m using the Arduino UNO R3 with an Atmega328p chip. It probably work on previous version of UNO</p>
+<p>I’m using the Arduino UNO R3 with an Atmega328p chip. But it probably work on previous version of UNO</p>
 
 <ul>
   <li>Wire the  breadboard, the LED and the resistor as seen on the image</li>
-  <li>Connect the red wire to PORTB0 (D8), the blue wire to ground and plug Arduino to the computer using the USB cable</li>
+  <li>Connect the red wire to <strong>PORTB0</strong> (D8), the blue wire to ground and plug Arduino to the computer using the USB cable</li>
 </ul>
 
 <p><br />
