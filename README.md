@@ -5,6 +5,9 @@ Commands:
 jekyll build
 jekyll serve
 
+Install plugins exemples:
+gem install jekyll-remote-theme 
+
 Installation on ubuntu:
 
 Ruby:
