@@ -14,11 +14,11 @@ li {
 }
 
 a {
-  color: #4387e0;
+  color: #6397db;
 }
 
 a:visited {
-  color: #4387e0;
+  color: #6397db;
 }
 
 a:hover {
@@ -61,7 +61,7 @@ a:hover {
   border-top: 1px solid #3a3a3a;
 }
 
-/* Highlight style override */
+/* Highlight code style override */
 
 pre, code {
   background: #06060f;
