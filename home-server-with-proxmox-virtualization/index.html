@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2025-06-01T16:30:42+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Home Server with Proxmox Virtualization</title><link href="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/" rel="alternate" type="text/html" title="Home Server with Proxmox Virtualization" /><published>2025-06-01T16:00:00+00:00</published><updated>2025-06-01T16:00:00+00:00</updated><id>https://blog.sparkland.ca/home-server-with-proxmox-virtualization</id><content type="html" xml:base="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/"><![CDATA[<h2 id="building-the-server">Building the server</h2>
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Home Server with Proxmox Virtualization | Sparkland Blog</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Home Server with Proxmox Virtualization" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Building the server I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine that will serve as both a NAS and a virtualization server. My eyes were lurking towards the Jonsbo N3 case but I had hesitations:" />
+<meta property="og:description" content="Building the server I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine that will serve as both a NAS and a virtualization server. My eyes were lurking towards the Jonsbo N3 case but I had hesitations:" />
+<link rel="canonical" href="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/" />
+<meta property="og:url" content="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/" />
+<meta property="og:site_name" content="Sparkland Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-01T16:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Home Server with Proxmox Virtualization" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-06-01T16:00:00+00:00","datePublished":"2025-06-01T16:00:00+00:00","description":"Building the server I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine that will serve as both a NAS and a virtualization server. My eyes were lurking towards the Jonsbo N3 case but I had hesitations:","headline":"Home Server with Proxmox Virtualization","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/home-server-with-proxmox-virtualization/"},"url":"https://blog.sparkland.ca/home-server-with-proxmox-virtualization/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.sparkland.ca/feed.xml" title="Sparkland Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Sparkland Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Home Server with Proxmox Virtualization</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-06-01T16:00:00+00:00" itemprop="datePublished">Jun 1, 2025
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="building-the-server">Building the server</h2>
 <p>I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine
 that will serve as both a NAS and a virtualization server. My eyes were lurking towards the <strong>Jonsbo N3</strong> case but I had hesitations:</p>
 
@@ -148,103 +198,36 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
   <li>Surveillance</li>
   <li>Next-cloud
 <br /></li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Building the server I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine that will serve as both a NAS and a virtualization server. My eyes were lurking towards the Jonsbo N3 case but I had hesitations:]]></summary></entry><entry><title type="html">Simple Arduino Blink LED AVC-C on Linux</title><link href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" rel="alternate" type="text/html" title="Simple Arduino Blink LED AVC-C on Linux" /><published>2024-08-17T04:22:04+00:00</published><updated>2024-08-17T04:22:04+00:00</updated><id>https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux</id><content type="html" xml:base="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"><![CDATA[<h2 id="avr-c">AVR-C</h2>
-<p>If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino</p>
-
-<p><br /></p>
-
-<h2 id="install-packages">Install packages</h2>
-
-<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nb">sudo </span>apt update
-<span class="nb">sudo </span>apt <span class="nb">install </span>avrdude gcc-avr binutils-avr avr-libc make </code></pre></figure>
-
-<p><br /></p>
-
-<h2 id="program">Program</h2>
-<p>Open Vim or your editor of choice and write the code</p>
-
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// main.c</span>
-
-<span class="cp">#define F_CPU   16000000UL // Set clock speed
-</span>
-<span class="cp">#include</span> <span class="cpf">&lt;avr/io.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;util/delay.h&gt;</span><span class="cp">
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
-
-    <span class="c1">// Set PORTB0 as an output</span>
-    <span class="n">DDRB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">DDB0</span><span class="p">);</span>
-
-    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="p">{</span>
-       <span class="c1">// Set PORTB0</span>
-       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB0</span><span class="p">);</span>
-            
-       <span class="c1">// Wait</span>
-       <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
-
-       <span class="c1">// Unset PORTB0</span>
-       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB0</span><span class="p">);</span>
-
-       <span class="c1">// Wait</span>
-       <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
-
-<p><br />
-<strong>PORTB0</strong> refers to <strong>PB0</strong> on the pinout image</p>
-
-<p><a href="https://docs.arduino.cc/retired/boards/arduino-uno-rev3-with-long-pins/" target="_blank"><img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux/pinout.jpg" alt="Alt text" style="width: 78%; height: 78%;" /></a></p>
-
-<p><br /></p>
-
-<h2 id="makefile">Makefile</h2>
-
-<p>Makefile is very common tool when programming Arduino in AVR-C.
-Alternatively, you could run each command one by one</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># Makefile</span>
-
-default:
-        avr-gcc <span class="nt">-Os</span> <span class="nt">-mmcu</span><span class="o">=</span>atmega328p <span class="nt">-c</span> <span class="nt">-o</span> bin/main.o main.c
-        avr-gcc <span class="nt">-o</span> bin/main.bin bin/main.o
-        avr-objcopy <span class="nt">-O</span> ihex <span class="nt">-R</span> .eeprom bin/main.bin bin/main.hex
-
-upload:
-        <span class="nb">sudo </span>avrdude <span class="nt">-F</span> <span class="nt">-V</span> <span class="nt">-c</span> arduino <span class="nt">-p</span> ATMEGA328P <span class="nt">-P</span> /dev/ttyACM0 <span class="nt">-b</span> 115200 <span class="nt">-U</span> flash:w:main.hex</code></pre></figure>
-
-<p><br /></p>
-
-<h2 id="setup-the-breadboard-and-the-arduino">Setup the breadboard and the Arduino</h2>
-<p>I’m using the Arduino UNO R3 with an Atmega328p chip. But it probably work on previous version of UNO</p>
-
-<ul>
-  <li>Wire the  breadboard, the LED and the resistor as seen on the image</li>
-  <li>Connect the red wire to <strong>PORTB0</strong> (D8), the blue wire to ground and plug Arduino to the computer using the USB cable</li>
 </ul>
 
-<p><br />
-<img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux/led.jpg" alt="Alt text" /></p>
+  </div><a class="u-url" href="/home-server-with-proxmox-virtualization/" hidden></a>
+</article>
 
-<p><br /></p>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
 
-<h2 id="compile-and-upload">Compile and upload</h2>
+  <div class="wrapper">
 
-<p>Start by making a new directory ‘bin’ in the same location that the ‘main.c’ file than compile with ‘make’ and upload the program to the Atmega328p using ‘make upload’</p>
+    <h2 class="footer-heading">Sparkland Blog</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>bin
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Sparkland Blog</li><li><a class="u-email" href="mailto:antoine.dubreuil91@gmail.com">antoine.dubreuil91@gmail.com</a></li></ul>
+      </div>
 
-make
-make upload</code></pre></figure>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/larsenhupin"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">larsenhupin</span></a></li><li><a href="https://www.twitter.com/antoinedubreuiI"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">antoinedubreuiI</span></a></li></ul>
+</div>
 
-<p><img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux/terminal.jpg" alt="Alt text" /></p>
+      <div class="footer-col footer-col-3">
+        <p>Blog about various projects</p>
+      </div>
+    </div>
 
-<p><br /></p>
+  </div>
 
-<h2 id="resources">Resources</h2>
+</footer>
+</body>
 
-<p><a href="https://youtu.be/j4xw8QomkXs?si=07FDPM1oQW1TH6as" target="_blank">Low Level Learning - Getting Started with Baremetal Arduino C Programming</a></p>
-
-<p><a href="https://youtu.be/9ADxPRjZI4Q?si=RwZNeW9FpwtDTmXk" target="_blank">humanHardDrive - Learning AVR-C</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[AVR-C If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino]]></summary></entry></feed>
+</html>
