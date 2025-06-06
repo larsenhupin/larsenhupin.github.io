@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2025-06-01T16:30:42+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Home Server with Proxmox Virtualization</title><link href="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/" rel="alternate" type="text/html" title="Home Server with Proxmox Virtualization" /><published>2025-06-01T16:00:00+00:00</published><updated>2025-06-01T16:00:00+00:00</updated><id>https://blog.sparkland.ca/home-server-with-proxmox-virtualization</id><content type="html" xml:base="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/"><![CDATA[<h2 id="building-the-server">Building the server</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2025-06-06T04:06:49+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Home Server with Proxmox Virtualization</title><link href="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/" rel="alternate" type="text/html" title="Home Server with Proxmox Virtualization" /><published>2025-06-01T16:00:00+00:00</published><updated>2025-06-01T16:00:00+00:00</updated><id>https://blog.sparkland.ca/home-server-with-proxmox-virtualization</id><content type="html" xml:base="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/"><![CDATA[<h2 id="building-the-server">Building the server</h2>
 <p>I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine
 that will serve as both a NAS and a virtualization server. My eyes were lurking towards the <strong>Jonsbo N3</strong> case but I had hesitations:</p>
 
 <ul>
   <li>ITX motherboards usually have only 2 DIMM slots, fewer PCIe slots, and fewer SATA ports</li>
-  <li>SFX power supply, which are less common and more expensive</li>
-  <li>Airflow not optimal</li>
+  <li>SFX power supplies are less common and more expensive</li>
+  <li>Airflow is not optimal</li>
 </ul>
 
 <p>I decided to put the project on hold until… <a href="https://youtu.be/Jr5MjhgPz_c?si=h1uplTj6O9L81UQD" target="_blank">Wolfgang’s Channel dropped this video</a><br /><br /></p>
@@ -14,7 +14,7 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 
 <p><strong>Sagittarious 8-Bay</strong></p>
 
-<p>Wolfgang’s Channel was a big inspiration for building this home server. The turning point for me was learning about this case. It supports mATX motherboards and ATX power supplies. The simple design for adding/removing hard drives is neat and the case is made entirely of metal parts. It is the highest-priced item on the list, so indeed, one can go with a regular PC case and 3D print brackets for the hard drives, but I find the form factor ideal.</p>
+<p>Wolfgang’s Channel was a big inspiration for building this home server. The turning point for me was learning about this case. It supports mATX motherboards and ATX power supplies. The simple design for adding/removing hard drives is neat and the case is made entirely of metal parts. It is the highest-priced item on the list, so another option would be to use a regular PC case and 3D print brackets for the hard drives, but I find the form factor ideal.</p>
 
 <p>Ordering from AliExpress took less than two weeks.<br /><br />
 <img src="../assets/images/home-server-with-proxmox-virtualization/case1_mod2.jpg" alt="Sagittarious 8-Bay case" /><br /><br /></p>
@@ -35,7 +35,7 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 <h3 id="cpu">CPU</h3>
 <p><strong>AMD Ryzen 7 PRO 4750G</strong></p>
 
-<p>8 cores / 16 threads at 3.6 GHz. I could have saved some money buying the <strong>Ryzen 5 PRO 4650G</strong>. However, I didn’t want to regret having fewer cores than I might need. My plan is to put this machine to work.</p>
+<p>8 cores / 16 threads at 3.6 GHz. I could have saved money buying the <strong>Ryzen 5 PRO 4650G</strong>. However, I didn’t want to regret having fewer cores than I might need. I plan to put this machine to work.</p>
 
 <p>Integrated graphics (iGPU) is a huge benefit since I won’t be adding a GPU any time soon. It’s useful for accessing the BIOS and during the initial Proxmox installation. It might even come in handy for niche applications like video transcoding or RDP.</p>
 
@@ -44,14 +44,14 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 <h3 id="ram">RAM</h3>
 <p><strong>Kingston ECC 2666MHz 16GB DDR4 (KSM26ED8/16HD)</strong></p>
 
-<p>Why bother with ECC memory? For basic NAS features, it might not be essential. But since I plan to run a lot of VMs in a semi-professional environment, I believe it’s worth it. Correcting single-bit errors adds important data integrity benefits. And since I rely mostly on the ZFS file system, ECC helps ensure that memory errors don’t silently corrupt checksums or file metadata before the data is written to disk.<br /><br />
+<p>Why bother with ECC memory? For basic NAS features, it might not be essential. But since I plan to run a lot of VMs in a semi-professional environment, I believe it’s worth it. Correcting single-bit errors adds important data integrity benefits. And because I rely mostly on the ZFS file system, ECC helps ensure that memory errors don’t silently corrupt checksums and file metadata before the data is written to disk.<br /><br />
 <img src="../assets/images/home-server-with-proxmox-virtualization/ram1_mod.jpg" alt="Kingston RAM" width="550" /><br /><br /></p>
 
 <h3 id="nvme-ssd">NVMe SSD</h3>
 
 <p><strong>M.2 NVMe 1T SSD Crucial P3</strong></p>
 
-<p>I was baffled trying to find a 256GB NVMe SSD. There are few options, and the price is almost the same as a 1TB model. Since I don’t want to spend money on a high-capacity SATA SSD right now, I decided to buy the 1TB NVMe and use it as both the boot drive for Proxmox and storage for VMs. I know most people avoid this setup but I see few downsides.</p>
+<p>I was baffled trying to find a 256GB NVMe SSD. There are few options, and the price is almost the same as a 1TB model. I decided to buy the 1TB NVMe and use it as both the boot drive for Proxmox and storage for VMs. I know most people avoid this setup but I see few downsides.</p>
 
 <p>My motherboard has two Hyper M.2 sockets with almost identical specs. The one under the M.2 armor uses CPU lanes, while the other uses chipset lanes, which means slightly higher latency. Having another NVMe drive allows me to use ZFS live replication between them which adds better resilience to one of the more <em>crucial</em> aspects of the system.<br /><br />
 <img src="../assets/images/home-server-with-proxmox-virtualization//nvme_drive.jpg" alt="Crucial NVMe SSD" /><br /><br /></p>
@@ -60,18 +60,18 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 
 <p><strong>Western Digital 6TB WD Red Plus</strong></p>
 
-<p>Mechanical hard drives are cheaper than SSDs, and I don’t need them to be fast. Their primary use is to store data I won’t be accessing often. If you plan to use ZFS, it is mandatory to get CMR drives, not SMR—the latter would be too slow. This is one of the reasons why the NAS community was angry at Western Digital when they changed the Red series to SMR and were not upfront about it. Now, only the Red Plus and Red Pro are CMR.</p>
+<p>Mechanical hard drives are cheaper than SSDs. If you plan to use ZFS, it’s mandatory to get CMR drives, not SMR—the latter would be too slow. This is one of the reasons why the NAS community was angry at Western Digital when they changed the Red series to SMR and were not upfront about it. Now, only the Red Plus and Red Pro are CMR.</p>
 
-<p>I started by looking at the <strong>Seagate IronWolf</strong> and other models from the same company. I read a lot of comments about them being loud. The server is sitting in my living room, so noise is an important factor. There’s a lot of information on the internet, but here’s what I gathered:</p>
+<p>I started by looking at the <strong>Seagate IronWolf</strong> and other models from the same company. I read a lot of comments about them being loud. The server is sitting in my living room, so noise is an important factor. There’s a lot of information on the internet, here’s what I gathered:</p>
 
 <ul>
-  <li>The bigger the drive, the more noise it makes. While it’s not always the case, it’s a good rule of thumb.</li>
-  <li>Helium-filled drives are less noisy but are usually only available in higher capacities.</li>
+  <li>The bigger the drive, the more noise it makes. While it’s not always true, it’s a good rule of thumb</li>
+  <li>Helium-filled drives are less noisy but are usually only available in higher capacities</li>
 </ul>
 
-<p>I went with the <strong>WD 6TB Red Plus</strong>, and I’m really happy with them. They make almost no noise when not in use. When writing files, there’s a little bit of noise, but it’s barely noticeable from 6 feet away.</p>
+<p>I went with the <strong>WD 6TB Red Plus</strong>, and I’m really happy with them. They make almost no noise when not in use. When writing files, there’s a little bit of noise, but it’s barely noticeable from 6 feet away.  I can read and write at 115MB/s which means the bottleneck right now is my network speed.</p>
 
-<p>Over time, I will add more 2TB SATA SSDs.
+<p>Over time, I will add 2TB SATA SSDs.
 <br /><br />
 <img src="../assets/images/home-server-with-proxmox-virtualization/hd2_mod2.jpg" alt="Western Digital 6TB WD Red Plus hard drive" width="300" /><br /><br /></p>
 
@@ -83,11 +83,11 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 
 <p><strong>Corsair HX 520W</strong></p>
 
-<p>I had this power supply lying around the house. It has enough wattage for now and is modular, which helps minimize clutter inside the case. Considering its age, I’ll need to buy a new PSU at some point. I’ll look for something with good energy effiency and more power.<br /><br /></p>
+<p>I had this power supply lying around the house. It has enough wattage for now and is modular, which helps minimize clutter inside the case. Considering its age, I’ll need to buy a new PSU at some point. I’ll look for something with good energy efficiency and more power.<br /><br /></p>
 
 <h3 id="other-upgrades">Other upgrades</h3>
 
-<p>Add a 2.5 Gbps PCIe network interface card if faster network speed is needed and a <a href="https://pikvm.org/" target="_blank">PiKVM</a> for external controls<br /><br /></p>
+<p>Add a 2.5 Gbps PCIe network interface card if I need faster network speed and a <a href="https://pikvm.org/" target="_blank">PiKVM</a> for external controls<br /><br /></p>
 
 <hr />
 
@@ -99,28 +99,26 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 
 <h3 id="proxmox">Proxmox</h3>
 
-<p>I decided to go with Proxmox because when Broadcom acquired VMware, they discontinued the free version. They have since brought it back but considering their history of shady business practices, I chose the open-source alternative. It’s a good choice for me because it’s Debian-based, which I’m very used to. The web interface is solid. Overall, Proxmox does exactly what I need.<br /><br /></p>
+<p>I went with Proxmox because when Broadcom acquired VMware, they discontinued the free version. They have since brought it back but considering their history of shady business practices, I chose the open-source alternative. It’s good for me because it’s Debian-based, which I’m very used to and the web interface is solid. Overall, Proxmox does exactly what I need.<br /><br /></p>
 
 <h3 id="cloud">Cloud</h3>
 
-<p>But why not use the cloud? There’s a long-running debate between cloud and on-premises—and it’s quite boring. Both are important. I use the cloud when I need to deploy in production. My build is intended to let me run as many VMs as I want. It’s a testbench. I mostly work with Linux servers and I like to compartmentalize my services into separate virtual machines that communicate with each other.</p>
-
-<p>Nothing feels better than <em>home</em>.<br /><br /></p>
+<p>But why not use the cloud? There’s a long-running debate between cloud and on-premises—and it’s getting old. Both are important. I use the cloud when I need to deploy in production. My build is intended to let me run as many VMs as I want. It’s a testbench. I mostly work with Linux servers and I like to compartmentalize my services into separate virtual machines that communicate with each other, nothing feels better than <em>home</em>.<br /><br /></p>
 
 <h3 id="backup">Backup</h3>
-<p>Live replication is not a backup. For sufficient protection against data loss, you need at least one backup at an offsite location. I have not yet decided which strategy I’m going to use but here are the options I’m considering:</p>
+<p>Live replication is not a backup. For sufficient protection against data loss, you need at least one backup at an offsite location. I have yet to decide which strategy I’m going to use but here are the options I’m considering:</p>
 
 <ul>
   <li>Amazon S3 Glacier – A good, low-cost cloud solution for long-term storage</li>
-  <li>Build another server – Possibly using the Jonsbo N3 case, which I would place at a different location, like at a family member house
+  <li>Build another server – Possibly using the Jonsbo N3 case, which I would place somewhere else, like at a family member house
 <br /><br /></li>
 </ul>
 
 <h3 id="services">Services</h3>
 
-<p>It might be late to explain exactly why I needed to build my home server, but if you’ve read this far, you deserve the <em>truth</em>.</p>
+<p>It might be late to explain exactly why I needed to build my home server but if you’ve read this far you deserve the <em>truth</em>.</p>
 
-<p>Most of my data was spread across an external hard drive, a current laptop, a secondary Linux boot drive, and a few other PCs. I just grew tired of having to switch boot drives to access my data. I love having a centralized way to access it. Code is one of the most important types of data, and having projects scattered everywhere is a mess. It’s quite straightforward to create your own Git server. Once the code is committed and pushed to the server, you can retrieve it from any of your PCs. Also, I like to use SSH with VSCode. I can SSH into one of my Ubuntu servers from any of my machines and continue working on my project. <em>Life is great</em>.</p>
+<p>Most of my data was spread across an external hard drive, a laptop, a secondary boot drive and other PCs. I grew tired of having to switch boot drives to access it. Also, having programming projects scattered everywhere is a mess. It’s straightforward to create a Git server. Once the code is committed and pushed, you can retrieve it from any PCs. Also, I like to use SSH with VSCode. I can SSH into one of the VMs and continue working on my project. <em>Life is great</em>.</p>
 
 <p>Here’s a non-exhaustive list of services I plan to create on my home server.</p>
 

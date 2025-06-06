@@ -30,6 +30,17 @@ a:hover {
   max-width: 1100px;
 }
 
+
+.menu-icon {
+  background-color: #06060f;
+  /* border-color: #3a3a3a; */
+}
+
+.site-nav {
+  /* background-color: #06060f; */
+  border-color: #3a3a3a;
+}
+
 .site-header {
   background: #121214;
   border-top: 1px solid #3a3a3a;
