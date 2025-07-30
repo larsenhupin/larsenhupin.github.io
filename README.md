@@ -6,6 +6,11 @@
 bundle exec jekyll serve
 bundle exec jekyll build
 
+
+Change video to loop video:
+ffmpeg -i input.mp4 -c:v libx264 -pix_fmt yuv420p -movflags +faststart -an -vf "fps=30" output.mp4
+
+
 #### Global commands
 
 jekyll build
