@@ -76,26 +76,8 @@ a:hover {
   border-top: 1px solid #3a3a3a;
 }
 
-#fading-led-gif-container {
-  width: 400px;
-  height: 300px;
-  overflow: hidden;
-  /* position: relative; */
-}
-
-.fading-led-gif {
-    animation: none !important;
-  transition: none !important;
-  /* will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden; */
-  /* position: relative;
-  top: -50px; */
-  /* transform: translateY(-50px); */
-}
-
 .fading-led-table {
-  width: 800px !important;
+  width: 905px !important;
 }
 
 .fading-led-table tr {
