@@ -76,6 +76,20 @@ a:hover {
   border-top: 1px solid #3a3a3a;
 }
 
+.fading-led-table {
+  width: 905px !important;
+}
+
+.fading-led-table tr {
+  color: #ffffff !important;
+  background-color: #1c1c1d !important;
+}
+
+.fading-led-table th {
+  color: #ffffff !important;
+  background-color: #1c1c1d !important;
+}
+
 /* Highlight code style override */
 
 pre, code {
