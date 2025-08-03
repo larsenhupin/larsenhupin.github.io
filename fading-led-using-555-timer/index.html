@@ -51,62 +51,64 @@
     <h2 id="fading-leds">Fading leds</h2>
 <p>A flashing fading LEDs circuit.</p>
 
+<div class="overflow-container">
 <video autoplay="" muted="" loop="" playsinline="" width="630">
   <source src="../assets/images/fading-led-using-555-timer/555timer.mp4" type="video/mp4" />
 </video>
+</div>
 <p><br /></p>
 
 <h2 id="tool">Tool</h2>
 <p><strong>General</strong>: Plier cutter, non-serrated long nose plier, wire stripper.
 <br /></p>
 
-<p><strong>Multimeter</strong>: The multimeter is an essential tool in electronics. It’s useful to capture voltage in your circuit.<br />
-It can be use to test the components before building the circuit. Modern ones are able to test resistors, capacitors and LEDs.</p>
+<p><strong>Multimeter</strong>: The multimeter is an essential tool in electronics. It’s useful to capture voltage in your circuit. It can be use to test the components before building the circuit. Modern ones are able to test resistors, capacitors and LEDs.</p>
 
 <p><a href="../assets/images/fading-led-using-555-timer/tools.jpg" target="_blank">Here’s an image example for those tools</a><br /></p>
 
 <h2 id="power-supply">Power supply</h2>
-<p>Use a phone charger (switching power supply) or a 5V portable battery. Cut a USB cable and crimp a Dupont connector.
- Here, I’m using a variable switching power supply: I cut the wire, soldered a female JST connector and connected it with a crimped male JST to a Dupont connector.<br /></p>
+<p>Use a phone charger (switching power supply) or a 5V portable battery. Cut a USB cable and crimp a Dupont connector. Here, I’m using a variable switching power supply: I cut the wire, soldered a female JST connector and connected it with a crimped male JST to a Dupont connector.<br /></p>
 
 <h2 id="material">Material</h2>
 
-<table class="fading-led-table">
-    <tr> <th>Component</th> <th>Description</th> </tr>
-    <tr> <td>Breadboard</td> <td>Use a high-quality breadboard for reliable connections. This one is from Elegoo.</td> </tr>
-    <tr> <td>Solid wire</td> <td>Use solid-core 22 AWG wire for a good fit on the breadboard.</td> </tr>
-    <tr> <td>555CN Timer</td> 
-         <td>
-             <ul>
-                 <li>Pin 1 (GND) → Connected to ground</li>
-                 <li>Pin 2 (Trigger) → Connected to pin 6</li>
-                 <li>Pin 3 (Output) → Connected to transistor base through 100 kΩ resistor</li>
-                 <li>Pin 4 (Reset) → Connected to Vcc</li>
-                 <li>Pin 5 (Control Voltage) → Connected to GND via 0.01 µF capacitor</li>
-                 <li>Pin 6 (Threshold) → Connected to pin 2 and to the timing capacitor</li>
-                 <li>Pin 7 (Discharge) → Connected between 1 kΩ resistor from Vcc and 5 kΩ to pin 6</li>
-                 <li>Pin 8 (Vcc) → Connected to power supply (+5 V)</li>
-             </ul>
-         </td>
-    </tr>
-    <tr> <td>470 µF electrolytic capacitor</td> <td>Connected between GND and pins 2 and 6 to control the timing/fading cycle.</td> </tr>
-    <tr> <td>1 kΩ resistor</td> <td>Connected between Vcc and pin 7 as part of the RC timing logic.</td> </tr>
-    <tr> <td>5 kΩ resistor</td> <td>Connected between pins 6 and 7 as part of the RC timing logic.</td> </tr>
-    <tr> <td>100 kΩ resistor</td> <td>Connected between pin 3 and transistor base to limits current and protect the components.</td> </tr>
-    <tr> <td>NPN transistor (2N2222)</td> 
-         <td>
-             <ul>
-                 <li>Base → Driven by pin 3 output through 100 kΩ resistor</li>
-                 <li>Collector → Connected to Vcc</li>
-                 <li>Emitter → Connected to LED anodes</li>
-             </ul>
-         </td>
-    </tr>
-    <tr> <td>0.1 µF ceramic capacitor</td> <td>Placed between Vcc and GND to filter power supply voltage spikes.</td> </tr>
-    <tr> <td>0.01 µF ceramic capacitor</td> <td>Connected between GND and pin 5 of the 555 timer to stabilize internal voltage reference.</td> </tr>
-    <tr> <td>330 Ω resistors (×6)</td> <td>Connected between LEDs cathode (−) and GND to limit current.</td> </tr>
-    <tr> <td>Red LEDs (×6)</td> <td>Standard red LEDs connected in parallel to the transistor emitter. Fade in and out.</td> </tr>
-</table>
+<div class="overflow-container">
+    <table class="fading-led-table">
+        <tr> <th>Component</th> <th>Description</th> </tr>
+        <tr> <td>Breadboard</td> <td>Use a high-quality breadboard for reliable connections. This one is from Elegoo.</td> </tr>
+        <tr> <td>Solid wire</td> <td>Use solid-core 22 AWG wire for a good fit on the breadboard.</td> </tr>
+        <tr> <td>555CN Timer</td> 
+            <td>
+                <ul>
+                    <li>Pin 1 (GND) → Connected to ground</li>
+                    <li>Pin 2 (Trigger) → Connected to pin 6</li>
+                    <li>Pin 3 (Output) → Connected to transistor base through 100 kΩ resistor</li>
+                    <li>Pin 4 (Reset) → Connected to Vcc</li>
+                    <li>Pin 5 (Control Voltage) → Connected to GND via 0.01 µF capacitor</li>
+                    <li>Pin 6 (Threshold) → Connected to pin 2 and to the timing capacitor</li>
+                    <li>Pin 7 (Discharge) → Connected between 1 kΩ resistor from Vcc and 5 kΩ to pin 6</li>
+                    <li>Pin 8 (Vcc) → Connected to power supply (+5 V)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr> <td>470 µF electrolytic capacitor</td> <td>Connected between GND and pins 2 and 6 to control the timing/fading cycle.</td> </tr>
+        <tr> <td>1 kΩ resistor</td> <td>Connected between Vcc and pin 7 as part of the RC timing logic.</td> </tr>
+        <tr> <td>5 kΩ resistor</td> <td>Connected between pins 6 and 7 as part of the RC timing logic.</td> </tr>
+        <tr> <td>100 kΩ resistor</td> <td>Connected between pin 3 and transistor base to limits current and protect the components.</td> </tr>
+        <tr> <td>NPN transistor (2N2222)</td> 
+            <td>
+                <ul>
+                    <li>Base → Driven by pin 3 output through 100 kΩ resistor</li>
+                    <li>Collector → Connected to Vcc</li>
+                    <li>Emitter → Connected to LED anodes</li>
+                </ul>
+            </td>
+        </tr>
+        <tr> <td>0.1 µF ceramic capacitor</td> <td>Placed between Vcc and GND to filter power supply voltage spikes.</td> </tr>
+        <tr> <td>0.01 µF ceramic capacitor</td> <td>Connected between GND and pin 5 of the 555 timer to stabilize internal voltage reference.</td> </tr>
+        <tr> <td>330 Ω resistors (×6)</td> <td>Connected between LEDs cathode (−) and GND to limit current.</td> </tr>
+        <tr> <td>Red LEDs (×6)</td> <td>Standard red LEDs connected in parallel to the transistor emitter. Fade in and out.</td> </tr>
+    </table>
+</div>
 
 <h2 id="pinout">Pinout</h2>
 <p><img src="../assets/images/fading-led-using-555-timer/555TimerPinout.png" alt="555TimerPinout" /><br /><br /></p>
