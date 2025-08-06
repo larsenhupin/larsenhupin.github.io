@@ -1,3 +1,7 @@
+body {
+  background-color: #1c1c1d;
+}
+
 html {
   scrollbar-color: #555 #1e1e1e; /* thumb and track */
   scrollbar-width: thin;
@@ -10,6 +14,10 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   color: white;
+}
+
+.ul-list {
+  margin-bottom: 0px;
 }
 
 li {
@@ -61,6 +69,11 @@ a:hover {
 
 .site-nav .page-link {
   color: white;
+  background-color: #121214;
+}
+
+nav.site-nav {
+  background-color: #121214;
 }
 
 .post-title.p-name {
@@ -85,7 +98,7 @@ a:hover {
 }
 
 .fading-led-table {
-  width: 905px !important;
+  width: 835px !important;
 }
 
 .fading-led-table tr {
