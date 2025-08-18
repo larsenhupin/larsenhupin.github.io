@@ -1,13 +1,3 @@
-.consolas {
-  font-family: 'Consolas', Courier, monospace;
-}
-
-#pwm-ascii {
-  color: white;
-  /* font-family: 'ui-monospace', 'SFMono-Regular', 'SF Mono, Menlo', 'Consolas', 'Liberation Mono', monospace !important; */
-  font-family: 'Consolas', monospace;
-}
-
 body {
   background-color: #1c1c1d;
 }
@@ -119,6 +109,10 @@ nav.site-nav {
 .fading-led-table th {
   color: #ffffff !important;
   background-color: #1c1c1d !important;
+}
+
+table th, table td {
+    padding: 4px 10px;
 }
 
 

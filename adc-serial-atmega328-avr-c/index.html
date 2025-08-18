@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-18T03:44:18+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">ADC and UART on Atmega328 in AVR-C</title><link href="http://localhost:4000/adc-serial-atmega328-avr-c/" rel="alternate" type="text/html" title="ADC and UART on Atmega328 in AVR-C" /><published>2025-08-05T04:00:00+00:00</published><updated>2025-08-05T04:00:00+00:00</updated><id>http://localhost:4000/adc-serial-atmega328-avr-c</id><content type="html" xml:base="http://localhost:4000/adc-serial-atmega328-avr-c/"><![CDATA[<h3 id="analog-digital-conversion-and-uart-on-atmega328-in-avr-c-on-linux">Analog digital conversion and UART on Atmega328 in AVR-C on Linux</h3>
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>ADC and UART on Atmega328 in AVR-C | Sparkland Blog</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="ADC and UART on Atmega328 in AVR-C" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Analog digital conversion and UART on Atmega328 in AVR-C on Linux" />
+<meta property="og:description" content="Analog digital conversion and UART on Atmega328 in AVR-C on Linux" />
+<link rel="canonical" href="http://localhost:4000/adc-serial-atmega328-avr-c/" />
+<meta property="og:url" content="http://localhost:4000/adc-serial-atmega328-avr-c/" />
+<meta property="og:site_name" content="Sparkland Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-05T04:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ADC and UART on Atmega328 in AVR-C" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-05T04:00:00+00:00","datePublished":"2025-08-05T04:00:00+00:00","description":"Analog digital conversion and UART on Atmega328 in AVR-C on Linux","headline":"ADC and UART on Atmega328 in AVR-C","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/adc-serial-atmega328-avr-c/"},"url":"http://localhost:4000/adc-serial-atmega328-avr-c/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Sparkland Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Sparkland Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ADC and UART on Atmega328 in AVR-C</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-08-05T04:00:00+00:00" itemprop="datePublished">Aug 5, 2025
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="analog-digital-conversion-and-uart-on-atmega328-in-avr-c-on-linux">Analog digital conversion and UART on Atmega328 in AVR-C on Linux</h3>
 
 <p><img src="../assets/images/adc-serial-atmega328-avr-c/atmega328.jpg" alt="Atmega328 chip" width="550" /></p>
 
@@ -436,317 +486,36 @@ clean:
 <h2 id="resource">Resource</h2>
 <p><a href="https://www.sparkfun.com/pocket-avr-programmer.html" target="_blank">Sparkfun AVR programmer</a><br />
 <a href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" target="_blank">Simple arduino blink led avr-c on linux</a><br />
-<a href="https://youtu.be/9ADxPRjZI4Q?si=RwZNeW9FpwtDTmXk" target="_blank">GOAT humanHardDrive - Learning AVR-C</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Analog digital conversion and UART on Atmega328 in AVR-C on Linux]]></summary></entry><entry><title type="html">A Fading LEDs circuit using 555 Timer on Breadboard</title><link href="http://localhost:4000/fading-leds-using-555-timer/" rel="alternate" type="text/html" title="A Fading LEDs circuit using 555 Timer on Breadboard" /><published>2025-08-03T04:00:00+00:00</published><updated>2025-08-03T04:00:00+00:00</updated><id>http://localhost:4000/fading-leds-using-555-timer</id><content type="html" xml:base="http://localhost:4000/fading-leds-using-555-timer/"><![CDATA[<h3 id="a-fading-leds-circuit">A fading LEDs circuit</h3>
+<a href="https://youtu.be/9ADxPRjZI4Q?si=RwZNeW9FpwtDTmXk" target="_blank">GOAT humanHardDrive - Learning AVR-C</a></p>
 
-<div class="overflow-container">
-<video autoplay="" muted="" loop="" playsinline="" width="630">
-  <source src="../assets/images/fading-led-using-555-timer/555timer.mp4" type="video/mp4" />
-</video>
-</div>
-<p><br /></p>
+  </div><a class="u-url" href="/adc-serial-atmega328-avr-c/" hidden></a>
+</article>
 
-<h2 id="timer">555 Timer</h2>
-<p>The 555 timer is an integrated circuit that outputs pulses. It’s configurable in astable multivibrator mode to run continuously and can be used as a timer, a clock, a square wave generator, an oscillator with Pulse Width Modulation and more.</p>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
 
-<p>In this circuit, it’s use as an analog sawtooth wave generator by drawing curent from the capacitor and feeding it into the transistor that buffer the signal to the LEDs. It’s a circuit I made by mistakes trying to learn about the 555. It’s shows the timing capacitor charge/discharge cycle. But it also load the capacitor using a transistor and LEDs which make the timing much harder to calculate.</p>
+  <div class="wrapper">
 
-<h2 id="tools">Tools</h2>
-<p><strong>General</strong>: Plier cutter, non-serrated long nose plier, wire stripper and multimeter. <a href="../assets/images/fading-led-using-555-timer/tools.jpg" target="_blank">Here’s an image example for those tools</a><br />
-The multimeter is useful to capture voltage in your circuit and it can also be use to test the components before placing them on the board.<br /></p>
+    <h2 class="footer-heading">Sparkland Blog</h2>
 
-<h2 id="power-supply">Power supply</h2>
-<p>Use a phone charger (switching power supply) or a 5V portable battery. Cut a USB cable and crimp a Dupont connector.<br /></p>
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Sparkland Blog</li><li><a class="u-email" href="mailto:antoine.dubreuil@sparkland.ca">antoine.dubreuil@sparkland.ca</a></li></ul>
+      </div>
 
-<h2 id="components">Components</h2>
-
-<div class="overflow-container">
-    <table class="fading-led-table">
-        <tr> <th>Component</th> <th>Description</th> </tr>
-        <tr> <td>Breadboard</td> <td>Use a high-quality breadboard for reliable connections. This one is from Elegoo.</td> </tr>
-        <tr> <td>Solid wire</td> <td>Use solid-core 22 AWG wire for a good fit on the breadboard.</td> </tr>
-        <tr> <td>555 Timer</td> 
-        <td>
-            <ul class="ul-list">
-                <li>Pin 1 (GND) → GND</li>
-                <li>Pin 2 (Trigger) → 470 µF capacitor and pin 6</li>
-                <li>Pin 3 (Output) → Nothing</li>
-                <li>Pin 4 (Reset) → Vcc</li>
-                <li>Pin 5 (Control Voltage) → GND via 0.01 µF capacitor</li>
-                <li>Pin 6 (Threshold) → Transistor base</li>
-                <li>Pin 7 (Discharge) → 1 kΩ resistor from Vcc and 5 kΩ to pin 6</li>
-                <li>Pin 8 (Vcc) → Power supply (5 V)</li>
-            </ul>
-        </td>
-        </tr>
-        <tr> <td>470 µF electrolytic capacitor</td> <td>Connected between GND and pins 2 and 6 to control the timing/fading cycle.</td> </tr>
-        <tr> <td>1 kΩ resistor</td> <td>Connected between Vcc and pin 7 as part of the timing logic.</td> </tr>
-        <tr> <td>5 kΩ resistor</td> <td>Connected between pins 6 and 7 as part of the timing logic.</td> </tr>
-        <tr> <td>NPN transistor (2N2222)</td> 
-            <td>
-                <ul class="ul-list">
-                    <li>Base → Driven by pins 2 &amp; 6 and 470 µF capacitor</li>
-                    <li>Collector → Connected to Vcc</li>
-                    <li>Emitter → Connected to LED anodes</li>
-                </ul>
-            </td>
-        </tr>
-        <tr> <td>0.1 µF ceramic capacitor</td> <td>Placed between Vcc and GND to filter power supply voltage spikes.</td> </tr>
-        <tr> <td>0.01 µF ceramic capacitor</td> <td>Between GND and pin 5 of the 555 timer to stabilize internal voltage reference.</td> </tr>
-        <tr> <td>330 Ω resistors (×6)</td> <td>Connected between LEDs cathode (−) and GND to limit current.</td> </tr>
-        <tr> <td>Red LEDs (×6)</td> <td>Connected in parallel to the transistor emitter.</td> </tr>
-    </table>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/larsenhupin"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">larsenhupin</span></a></li><li><a href="https://www.twitter.com/antoinedubreuiI"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">antoinedubreuiI</span></a></li></ul>
 </div>
 
-<h2 id="pinout">Pinout</h2>
-<p><img src="../assets/images/fading-led-using-555-timer/555TimerPinout.png" alt="555 Timer Pinout" /> <img src="../assets/images/fading-led-using-555-timer/transistor.png" alt="Transistor Pinout" /><br /><br /></p>
+      <div class="footer-col footer-col-3">
+        <p>Blog about various projects</p>
+      </div>
+    </div>
 
-<h2 id="resource">Resource</h2>
+  </div>
 
-<p><a href="https://youtu.be/kRlSFm519Bo?si=iZPP58k-VTZORQVS" target="_blank">Ben Eater - Astable 555 timer</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[A fading LEDs circuit]]></summary></entry><entry><title type="html">Home Server with Proxmox Virtualization</title><link href="http://localhost:4000/home-server-with-proxmox-virtualization/" rel="alternate" type="text/html" title="Home Server with Proxmox Virtualization" /><published>2025-06-01T16:00:00+00:00</published><updated>2025-06-01T16:00:00+00:00</updated><id>http://localhost:4000/home-server-with-proxmox-virtualization</id><content type="html" xml:base="http://localhost:4000/home-server-with-proxmox-virtualization/"><![CDATA[<h2 id="building-the-server">Building the server</h2>
-<p>I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine
-that will serve as both a NAS and a virtualization server. My eyes were lurking towards the <strong>Jonsbo N3</strong> case but I had hesitations:</p>
+</footer>
+</body>
 
-<ul>
-  <li>ITX motherboards usually have only 2 DIMM slots, fewer PCIe slots, and fewer SATA ports</li>
-  <li>SFX power supplies are less common and more expensive</li>
-  <li>Airflow is not optimal</li>
-</ul>
-
-<p>I decided to put the project on hold until… <a href="https://youtu.be/Jr5MjhgPz_c?si=h1uplTj6O9L81UQD" target="_blank">Wolfgang’s Channel dropped this video</a><br /><br /></p>
-
-<h3 id="case">Case</h3>
-
-<p><strong>Sagittarious 8-Bay</strong></p>
-
-<p>Wolfgang’s Channel was a big inspiration for building this home server. The turning point for me was learning about this case. It supports mATX motherboards and ATX power supplies. The simple design for adding/removing hard drives is neat and the case is made entirely of metal parts. It is the highest-priced item on the list, so another option would be to use a regular PC case and 3D print brackets for the hard drives, but I find the form factor ideal.</p>
-
-<p>Ordering from AliExpress took less than two weeks.<br /><br />
-<img src="../assets/images/home-server-with-proxmox-virtualization/case1_mod2.jpg" alt="Sagittarious 8-Bay case" /><br /><br /></p>
-
-<h3 id="motherboard">Motherboard</h3>
-<p><strong>ASRock X570M Pro4</strong></p>
-
-<p>If budget is a concern, you can choose a cheaper motherboard like the <strong>ASRock B550M Pro4</strong> but I decided to pay almost double for this one because of three key features:</p>
-
-<ul>
-  <li>8 native SATA ports – no need for a SATA PCIe expansion card</li>
-  <li>2 Hyper M.2 sockets – perfect for NVMe boot drive live replication with ZFS</li>
-  <li>10-phase power design VRM – better when upgrading to a 16-core CPU<br /></li>
-</ul>
-
-<p><img src="../assets/images/home-server-with-proxmox-virtualization/motherboard2_mod.jpg" alt="ASRock X570M Pro4 motherboard" width="600" /><br /><br /></p>
-
-<h3 id="cpu">CPU</h3>
-<p><strong>AMD Ryzen 7 PRO 4750G</strong></p>
-
-<p>8 cores / 16 threads at 3.6 GHz. I could have saved money buying the <strong>Ryzen 5 PRO 4650G</strong>. However, I didn’t want to regret having fewer cores than I might need. I plan to put this machine to work.</p>
-
-<p>Integrated graphics (iGPU) is a huge benefit since I won’t be adding a GPU any time soon. It’s useful for accessing the BIOS and during the initial Proxmox installation. It might even come in handy for niche applications like video transcoding or RDP.</p>
-
-<p>Also, ECC memory support is <em>very cool</em>.<br /><br /></p>
-
-<h3 id="ram">RAM</h3>
-<p><strong>Kingston ECC 2666MHz 16GB DDR4 (KSM26ED8/16HD)</strong></p>
-
-<p>Why bother with ECC memory? For basic NAS features, it might not be essential. But since I plan to run a lot of VMs in a semi-professional environment, I believe it’s worth it. Correcting single-bit errors adds important data integrity benefits. And because I rely mostly on the ZFS file system, ECC helps ensure that memory errors don’t silently corrupt checksums and file metadata before the data is written to disk.<br /><br />
-<img src="../assets/images/home-server-with-proxmox-virtualization/ram1_mod.jpg" alt="Kingston RAM" width="550" /><br /><br /></p>
-
-<h3 id="nvme-ssd">NVMe SSD</h3>
-
-<p><strong>M.2 NVMe 1T SSD Crucial P3</strong></p>
-
-<p>I was baffled trying to find a 256GB NVMe SSD. There are few options, and the price is almost the same as a 1TB model. I decided to buy the 1TB NVMe and use it as both the boot drive for Proxmox and storage for VMs. I know most people avoid this setup but I see few downsides.</p>
-
-<p>My motherboard has two Hyper M.2 sockets with almost identical specs. The one under the M.2 armor uses CPU lanes, while the other uses chipset lanes, which means slightly higher latency. Having another NVMe drive allows me to use ZFS live replication between them which adds better resilience to one of the more <em>crucial</em> aspects of the system.<br /><br />
-<img src="../assets/images/home-server-with-proxmox-virtualization//nvme_drive.jpg" alt="Crucial NVMe SSD" /><br /><br /></p>
-
-<h3 id="hard-drive">Hard drive</h3>
-
-<p><strong>Western Digital 6TB WD Red Plus</strong></p>
-
-<p>Mechanical hard drives are cheaper than SSDs. If you plan to use ZFS, it’s mandatory to get CMR drives, not SMR—the latter would be too slow. This is one of the reasons why the NAS community was angry at Western Digital when they changed the Red series to SMR and were not upfront about it. Now, only the Red Plus and Red Pro are CMR.</p>
-
-<p>I started by looking at the <strong>Seagate IronWolf</strong> and other models from the same company. I read a lot of comments about them being loud. The server is sitting in my living room, so noise is an important factor. There’s a lot of information on the internet, here’s what I gathered:</p>
-
-<ul>
-  <li>The bigger the drive, the more noise it makes. While it’s not always true, it’s a good rule of thumb</li>
-  <li>Helium-filled drives are less noisy but are usually only available in higher capacities</li>
-</ul>
-
-<p>I went with the <strong>WD 6TB Red Plus</strong>, and I’m really happy with them. They make almost no noise when not in use. When writing files, there’s a little bit of noise, but it’s barely noticeable from 6 feet away.  I can read and write at 115MB/s which means the bottleneck right now is my network speed.</p>
-
-<p>Over time, I will add 2TB SATA SSDs.
-<br /><br />
-<img src="../assets/images/home-server-with-proxmox-virtualization/hd2_mod2.jpg" alt="Western Digital 6TB WD Red Plus hard drive" width="300" /><br /><br /></p>
-
-<h3 id="fans">Fans</h3>
-
-<p><strong>ARCTIC P12 PWM</strong> case fans and the <strong>Thermalright AXP90-X36</strong> CPU fan. I have full confidence in Wolfgang’s thoughtful research, and considering the price tag and quality, I’m 100% satisfied.<br /><br /></p>
-
-<h3 id="psu">PSU</h3>
-
-<p><strong>Corsair HX 520W</strong></p>
-
-<p>I had this power supply lying around the house. It has enough wattage for now and is modular, which helps minimize clutter inside the case. Considering its age, I’ll need to buy a new PSU at some point. I’ll look for something with good energy efficiency and more power.<br /><br /></p>
-
-<h3 id="other-upgrades">Other upgrades</h3>
-
-<p>Add a 2.5 Gbps PCIe network interface card if I need faster network speed and a <a href="https://pikvm.org/" target="_blank">PiKVM</a> for external controls<br /><br /></p>
-
-<hr />
-
-<p><br /></p>
-
-<h2 id="virtualization">Virtualization</h2>
-<p><br />
-<img src="../assets/images/home-server-with-proxmox-virtualization/proxmox.png" alt="Proxmox interface" /><br /><br /></p>
-
-<h3 id="proxmox">Proxmox</h3>
-
-<p>I went with Proxmox because when Broadcom acquired VMware, they discontinued the free version. They have since brought it back but considering their history of shady business practices, I chose the open-source alternative. It’s good for me because it’s Debian-based, which I’m very used to and the web interface is solid. Overall, Proxmox does exactly what I need.<br /><br /></p>
-
-<h3 id="cloud">Cloud</h3>
-
-<p>But why not use the cloud? There’s a long-running debate between cloud and on-premises—and it’s getting old. Both are important. I use the cloud when I need to deploy in production. My build is intended to let me run as many VMs as I want. It’s a testbench. I mostly work with Linux servers and I like to compartmentalize my services into separate virtual machines that communicate with each other, nothing feels better than <em>home</em>.<br /><br /></p>
-
-<h3 id="backup">Backup</h3>
-<p>Live replication is not a backup. For sufficient protection against data loss, you need at least one backup at an offsite location. I have yet to decide which strategy I’m going to use but here are the options I’m considering:</p>
-
-<ul>
-  <li>Amazon S3 Glacier – A good, low-cost cloud solution for long-term storage</li>
-  <li>Build another server – Possibly using the Jonsbo N3 case, which I would place somewhere else, like at a family member house
-<br /><br /></li>
-</ul>
-
-<h3 id="services">Services</h3>
-
-<p>It might be late to explain exactly why I needed to build my home server but if you’ve read this far you deserve the <em>truth</em>.</p>
-
-<p>Most of my data was spread across an external hard drive, a laptop, a secondary boot drive and other PCs. I grew tired of having to switch boot drives to access it. Also, having programming projects scattered everywhere is a mess. It’s straightforward to create a Git server. Once the code is committed and pushed, you can retrieve it from any PCs. Also, I like to use SSH with VSCode. I can SSH into one of the VMs and continue working on my project. <em>Life is great</em>.</p>
-
-<p>Here’s a non-exhaustive list of services I plan to create on my home server.</p>
-
-<p>Work:</p>
-
-<ul>
-  <li>Web servers</li>
-  <li>Git server</li>
-  <li>File server</li>
-  <li>Firewall</li>
-  <li>Databases servers</li>
-  <li>Remote Desktop</li>
-  <li>VPN</li>
-</ul>
-
-<p>Home:</p>
-
-<ul>
-  <li>NAS</li>
-  <li>Vaultwarden</li>
-  <li>Jellyfin</li>
-  <li>Photos</li>
-  <li>Minecraft server</li>
-  <li>Home assistant</li>
-  <li>Surveillance</li>
-  <li>Next-cloud
-<br /></li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Building the server I have been looking to build my own home server for a while. The goal was to have a small yet powerful machine that will serve as both a NAS and a virtualization server. My eyes were lurking towards the Jonsbo N3 case but I had hesitations:]]></summary></entry><entry><title type="html">Simple Arduino Blink LED AVC-C on Linux</title><link href="http://localhost:4000/simple-arduino-blink-led-avr-c-on-linux/" rel="alternate" type="text/html" title="Simple Arduino Blink LED AVC-C on Linux" /><published>2024-08-17T04:22:04+00:00</published><updated>2024-08-17T04:22:04+00:00</updated><id>http://localhost:4000/simple-arduino-blink-led-avr-c-on-linux</id><content type="html" xml:base="http://localhost:4000/simple-arduino-blink-led-avr-c-on-linux/"><![CDATA[<h2 id="avr-c">AVR-C</h2>
-<p>If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino</p>
-
-<p><br /></p>
-
-<h2 id="install-packages">Install packages</h2>
-
-<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nb">sudo </span>apt update
-<span class="nb">sudo </span>apt <span class="nb">install </span>avrdude gcc-avr binutils-avr avr-libc make </code></pre></figure>
-
-<p><br /></p>
-
-<h2 id="program">Program</h2>
-<p>Open Vim or your editor of choice and write the code</p>
-
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// main.c</span>
-
-<span class="cp">#define F_CPU   16000000UL // Set clock speed
-</span>
-<span class="cp">#include</span> <span class="cpf">&lt;avr/io.h&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;util/delay.h&gt;</span><span class="cp">
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
-
-    <span class="c1">// Set PORTB0 as an output</span>
-    <span class="n">DDRB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">DDB0</span><span class="p">);</span>
-
-    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="p">{</span>
-       <span class="c1">// Set PORTB0</span>
-       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB0</span><span class="p">);</span>
-            
-       <span class="c1">// Wait</span>
-       <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
-
-       <span class="c1">// Unset PORTB0</span>
-       <span class="n">PORTB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">PORTB0</span><span class="p">);</span>
-
-       <span class="c1">// Wait</span>
-       <span class="n">_delay_ms</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
-
-<p><br />
-<strong>PORTB0</strong> refers to <strong>PB0</strong> on the pinout image</p>
-
-<p><a href="https://docs.arduino.cc/retired/boards/arduino-uno-rev3-with-long-pins/" target="_blank"><img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux/pinout.jpg" alt="Alt text" style="width: 78%; height: 78%;" /></a></p>
-
-<p><br /></p>
-
-<h2 id="makefile">Makefile</h2>
-
-<p>Makefile is very common tool when programming Arduino in AVR-C.
-Alternatively, you could run each command one by one</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># Makefile</span>
-
-default:
-        avr-gcc <span class="nt">-Os</span> <span class="nt">-mmcu</span><span class="o">=</span>atmega328p <span class="nt">-c</span> <span class="nt">-o</span> bin/main.o main.c
-        avr-gcc <span class="nt">-o</span> bin/main.bin bin/main.o
-        avr-objcopy <span class="nt">-O</span> ihex <span class="nt">-R</span> .eeprom bin/main.bin bin/main.hex
-
-upload:
-        <span class="nb">sudo </span>avrdude <span class="nt">-F</span> <span class="nt">-V</span> <span class="nt">-c</span> arduino <span class="nt">-p</span> ATMEGA328P <span class="nt">-P</span> /dev/ttyACM0 <span class="nt">-b</span> 115200 <span class="nt">-U</span> flash:w:main.hex</code></pre></figure>
-
-<p><br /></p>
-
-<h2 id="setup-the-breadboard-and-the-arduino">Setup the breadboard and the Arduino</h2>
-<p>I’m using the Arduino UNO R3 with an Atmega328p chip. But it probably work on previous version of UNO</p>
-
-<ul>
-  <li>Wire the  breadboard, the LED and the resistor as seen on the image</li>
-  <li>Connect the red wire to <strong>PORTB0</strong> (D8), the blue wire to ground and plug Arduino to the computer using the USB cable</li>
-</ul>
-
-<p><br />
-<img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux/led.jpg" alt="Alt text" /></p>
-
-<p><br /></p>
-
-<h2 id="compile-and-upload">Compile and upload</h2>
-
-<p>Start by making a new directory ‘bin’ in the same location that the ‘main.c’ file than compile with ‘make’ and upload the program to the Atmega328p using ‘make upload’</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>bin
-
-make
-make upload</code></pre></figure>
-
-<p><img src="../assets/images/simple-arduino-blink-led-avr-c-on-linux/terminal.jpg" alt="Alt text" /></p>
-
-<p><br /></p>
-
-<h2 id="resources">Resources</h2>
-
-<p><a href="https://youtu.be/j4xw8QomkXs?si=07FDPM1oQW1TH6as" target="_blank">Low Level Learning - Getting Started with Baremetal Arduino C Programming</a></p>
-
-<p><a href="https://youtu.be/9ADxPRjZI4Q?si=RwZNeW9FpwtDTmXk" target="_blank">humanHardDrive - Learning AVR-C</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[AVR-C If you like programming in C, this is a basic program to make an LED blink using the AVR-C programming language for Atmel microcontrollers. It is worth noting that using Sketch is much easier to build anything with Arduino]]></summary></entry></feed>
+</html>
