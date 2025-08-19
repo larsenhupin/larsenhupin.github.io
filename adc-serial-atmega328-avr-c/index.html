@@ -3,21 +3,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>ADC and UART on ATmega328 in AVR-C | Sparkland Blog</title>
+<title>ADC and UART on ATmega328P in AVR-C | Sparkland Blog</title>
 <meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="ADC and UART on ATmega328 in AVR-C" />
+<meta property="og:title" content="ADC and UART on ATmega328P in AVR-C" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Analog-to-digital conversion and UART on ATmega328 in AVR-C on Linux" />
-<meta property="og:description" content="Analog-to-digital conversion and UART on ATmega328 in AVR-C on Linux" />
+<meta name="description" content="Analog-to-digital conversion and UART on ATmega328P in AVR-C on Linux" />
+<meta property="og:description" content="Analog-to-digital conversion and UART on ATmega328P in AVR-C on Linux" />
 <link rel="canonical" href="http://localhost:4000/adc-serial-atmega328-avr-c/" />
 <meta property="og:url" content="http://localhost:4000/adc-serial-atmega328-avr-c/" />
 <meta property="og:site_name" content="Sparkland Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-08-18T04:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="ADC and UART on ATmega328 in AVR-C" />
+<meta property="twitter:title" content="ADC and UART on ATmega328P in AVR-C" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-18T04:00:00+00:00","datePublished":"2025-08-18T04:00:00+00:00","description":"Analog-to-digital conversion and UART on ATmega328 in AVR-C on Linux","headline":"ADC and UART on ATmega328 in AVR-C","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/adc-serial-atmega328-avr-c/"},"url":"http://localhost:4000/adc-serial-atmega328-avr-c/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-18T04:00:00+00:00","datePublished":"2025-08-18T04:00:00+00:00","description":"Analog-to-digital conversion and UART on ATmega328P in AVR-C on Linux","headline":"ADC and UART on ATmega328P in AVR-C","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/adc-serial-atmega328-avr-c/"},"url":"http://localhost:4000/adc-serial-atmega328-avr-c/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css">
   <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Sparkland Blog" /></head>
@@ -41,26 +41,26 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">ADC and UART on ATmega328 in AVR-C</h1>
+    <h1 class="post-title p-name" itemprop="name headline">ADC and UART on ATmega328P in AVR-C</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2025-08-18T04:00:00+00:00" itemprop="datePublished">Aug 18, 2025
       </time></p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <h3 id="analog-to-digital-conversion-and-uart-on-atmega328-in-avr-c-on-linux">Analog-to-digital conversion and UART on ATmega328 in AVR-C on Linux</h3>
+    <h3 id="analog-to-digital-conversion-and-uart-on-atmega328p-in-avr-c-on-linux">Analog-to-digital conversion and UART on ATmega328P in AVR-C on Linux</h3>
 
 <p><img src="../assets/images/adc-serial-atmega328-avr-c/atmega328.jpg" alt="Atmega328 chip" width="550" /></p>
 
-<h2 id="atmega328">ATmega328</h2>
-<p>The ATmega328 is a microcontroller unit used for timing, analog-to-digital conversion, serial communication, PWM, etc. If you have an Arduino UNO, it’s the chip on that board. You can use it for various purposes, for example: a temperature sensor or a controller for DC motors.</p>
+<h2 id="atmega328p">ATmega328P</h2>
+<p>The ATmega328P is a Microcontroller Unit used for timing, analog-to-digital conversion, serial communication, PWM, etc. If you have an Arduino UNO, it’s the chip on that board. You can use it for various purposes, for example: a temperature sensor or a controller for DC motors.</p>
 
-<p><em>Arduino</em> is an ecosystem built around the ATmega328 chip. It comes with Arduino Sketch which is based on the Processing programming language and works with the Arduino IDE. Why use something different? I encourage anyone to use and learn about it. But after making small projects I was asking myself what do pinMode() and analogRead() actually do? That’s why I decided to learn low-level AVR-C.</p>
+<p><em>Arduino</em> is an ecosystem built around the ATmega328P chip. It comes with Arduino Sketch which is based on the Processing programming language and works with the Arduino IDE. Why use something different? I encourage anyone to use and learn about it. But after making small projects I was asking myself what do pinMode() and analogRead() actually do? That’s why I decided to learn low-level AVR-C.</p>
 
 <p>The UNO is a board with a power supply, a USB connection, a serial device, SPI pins, a programmer, a clock, LED indicators, easy-to-use jumper headers and more.
 It’s possible to program AVR-C directly on the board <a href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" target="_blank">as I showed in this article.</a></p>
 
-<p>But instead of using it, we will put the ATmega328 directly on a breadboard and upload the code using an external programmer.
+<p>But instead of using it, we will put the ATmega328P directly on a breadboard and upload the code using an external programmer.
 Most of the information I learned to make this post is from a video series made by one of the best AVR-C / electronics YouTube channels: <a href="https://youtu.be/9ADxPRjZI4Q?si=RwZNeW9FpwtDTmXk" target="_blank">Human HardDrive</a>.</p>
 
 <h2 id="sparkfun-pocket-avr-programmer">SparkFun Pocket AVR Programmer</h2>
@@ -92,7 +92,7 @@ It comes with a gray cable but I don’t like it because you need a breakout boa
 <h2 id="datasheet">Datasheet</h2>
 
 <p>In electronics, it’s important to read datasheets. It’s certainly not easy but they contain crucial information about the parts that we are using.
-Here’s the <a href="../assets/files/Atmega328p_datasheet.pdf">datasheet</a> for the ATmega328 and that’s the pinout schematic:</p>
+Here’s the <a href="../assets/files/Atmega328    p_datasheet.pdf">datasheet</a> for the ATmega328P and that’s the pinout schematic:</p>
 
 <p><img src="../assets/images/adc-serial-atmega328-avr-c/PinAtmega328.png" alt="Atmega328 pinout" /></p>
 
@@ -101,7 +101,7 @@ Here’s the <a href="../assets/files/Atmega328p_datasheet.pdf">datasheet</a> fo
 <div class="overflow-container">
     <table class="fading-led-table">
         <tr> <th>Component</th> <th>Description</th> </tr>
-        <tr> <td>ATmega328 MCU</td> 
+        <tr> <td>ATmega328P MCU</td> 
         <td>
             <ul class="ul-list">
                 <li>Pin 1 (RESET) → RST on programmer</li>
@@ -161,9 +161,9 @@ The great thing about them is that they run only when they have to and they don�
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">setupTimer</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">TCCR0A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">WGM01</span><span class="p">);</span> <span class="c1">// Set to CTC mode</span>
-    <span class="n">OCR0A</span> <span class="o">=</span> <span class="mi">195</span><span class="p">;</span>
+    <span class="n">OCR0A</span> <span class="o">=</span> <span class="mi">195</span><span class="p">;</span> <span class="c1">// Count from 0 to 195</span>
     <span class="n">TIMSK0</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">OCIE0A</span><span class="p">);</span> <span class="c1">// Enable interrupt</span>
-    <span class="n">TCCR0B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">CS02</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">CS00</span><span class="p">);</span> <span class="c1">// Start at 1024 prescalar</span>
+    <span class="n">TCCR0B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">CS02</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">CS00</span><span class="p">));</span> <span class="c1">// Start at 1024 prescalar</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>In this configuration, we sample ADC every 12 ms:<br />
@@ -175,9 +175,9 @@ OCR0A + 1 = 196<br />
 <p>Inside the interrupt we force the ADC to use channel 0 and start the ADC conversion.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">ISR</span><span class="p">(</span><span class="n">TIMER0_COMPA_vect</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">channelADC</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                      <span class="c1">// Reset to ADC0</span>
+    <span class="n">channelADC</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Reset to ADC0</span>
     <span class="n">ADMUX</span> <span class="o">=</span> <span class="p">(</span><span class="n">ADMUX</span> <span class="o">&amp;</span> <span class="mh">0xF0</span><span class="p">)</span> <span class="o">|</span> <span class="n">channelADC</span><span class="p">;</span> <span class="c1">// Force start on ADC0, 0xF0 = 11110000</span>
-    <span class="n">ADCSRA</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">ADSC</span><span class="p">);</span>               <span class="c1">// Start conversion    </span>
+    <span class="n">ADCSRA</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">ADSC</span><span class="p">);</span>  <span class="c1">// Start conversion</span>
 <span class="p">}</span></code></pre></figure>
 
 <h2 id="analog-to-digital-converter">Analog-to-Digital converter</h2>
@@ -213,17 +213,17 @@ If we finish ADC0, we switch to ADC1 and start the conversion again so we can ge
         <span class="p">}</span>
 
         <span class="n">channelADC</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+        <span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
         <span class="kt">char</span> <span class="n">buffer0</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">buffer1</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
-        
+
         <span class="kt">uint16_t</span> <span class="n">millivolt0</span> <span class="o">=</span> <span class="p">(</span><span class="n">valuesADC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5000UL</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1023</span><span class="p">;</span>
         <span class="kt">uint16_t</span> <span class="n">millivolt1</span> <span class="o">=</span> <span class="p">(</span><span class="n">valuesADC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5000UL</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1023</span><span class="p">;</span>
-        
+
         <span class="n">millivoltToCharArray</span><span class="p">(</span><span class="n">millivolt0</span><span class="p">,</span> <span class="n">buffer0</span><span class="p">);</span>
         <span class="n">millivoltToCharArray</span><span class="p">(</span><span class="n">millivolt1</span><span class="p">,</span> <span class="n">buffer1</span><span class="p">);</span>
-        <span class="n">concatenateToLine</span><span class="p">(</span><span class="o">&amp;</span><span class="n">line</span><span class="p">);</span> <span class="c1">// Put both values on one line</span>
-        
-        <span class="n">writeSerial</span><span class="p">(</span><span class="n">line</span><span class="p">);</span> <span class="c1">// Queue the data in the next UART</span>
+        <span class="n">concatenateBufferToLine</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">buffer0</span><span class="p">,</span> <span class="n">buffer1</span><span class="p">);</span> <span class="c1">// Put both values on one line</span>
+
+        <span class="n">writeSerial</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -231,18 +231,49 @@ If we finish ADC0, we switch to ADC1 and start the conversion again so we can ge
 <p>The Universal Synchronous and Asynchronous serial Receiver and Transmitter is a serial communication device.<br />
 In the USART Control and Status Register 0 B, we set the bits to enable the interrupt and the transmission.<br />
 In the USART Control and Status Register 0 C, we set the bits to get an 8-bit dataframe.<br />
-Finally, we configure how quickly to send and receive bits.</p>
+And we configure how quickly to send and receive bits.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">setupUART</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">UCSR0B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">TXEN0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">TXCIE0</span><span class="p">);</span> <span class="c1">// Enable transmitter and interrupt</span>
-    <span class="n">UCSR0C</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">UCSZ01</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">UCSZ00</span><span class="p">);</span> <span class="c1">// Set 8-bit dataframe</span>
+    <span class="n">UCSR0C</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">UCSZ01</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">UCSZ00</span><span class="p">);</span> <span class="c1">// Set 8-bit data frame</span>
     <span class="n">UBRR0H</span> <span class="o">=</span> <span class="p">(</span><span class="n">BRC</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">);</span>
     <span class="n">UBRR0L</span> <span class="o">=</span> <span class="n">BRC</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
+<p>Finally, we send the characters to the hardware UART register using a ring buffer technique.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">writeSerial</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="c1">// Append serial</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strlen</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">serialTX</span><span class="p">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">serialTX</span><span class="p">.</span><span class="n">writePos</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">serialTX</span><span class="p">.</span><span class="n">writePos</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">serialTX</span><span class="p">.</span><span class="n">writePos</span> <span class="o">&gt;=</span> <span class="n">TX_BUFFER_SIZE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">serialTX</span><span class="p">.</span><span class="n">writePos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// Transmit serial</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">UCSR0A</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">UDRE0</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// Wait for transmit buffer to be ready</span>
+        <span class="n">UDR0</span> <span class="o">=</span> <span class="n">serialTX</span><span class="p">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span><span class="p">];</span>
+        <span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span> <span class="o">=</span> <span class="p">(</span><span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">TX_BUFFER_SIZE</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">ISR</span><span class="p">(</span><span class="n">USART_TX_vect</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span> <span class="o">!=</span> <span class="n">serialTX</span><span class="p">.</span><span class="n">writePos</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">UDR0</span> <span class="o">=</span> <span class="n">serialTX</span><span class="p">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span><span class="p">];</span>
+        <span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span> <span class="o">&gt;=</span> <span class="n">TX_BUFFER_SIZE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">serialTX</span><span class="p">.</span><span class="n">readPos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
 <p><br /></p>
 
-<p>I hope it gives some ideas about how the ATmega328 works. Basically, we flip bits (1 or 0) in registers using bit manipulation techniques and we leverage hardware interrupts to achieve desired outcome.</p>
+<p>I hope it gives some ideas about how the ATmega328P works. Basically, we flip bits (1 or 0) in registers using bit manipulation techniques to configure the MCU and we leverage hardware interrupts to achieve desired outcome.</p>
 
 <p>At the end, we are able to capture the voltage of the LED while turning the potentiomer.<br />
 Print the serial buffer of your computer using this command:</p>
@@ -276,14 +307,13 @@ Print the serial buffer of your computer using this command:</p>
 
 <h2 id="compile-and-upload">Compile and upload</h2>
 
-<p>Make a new directory ‘bin’ in the same location that the ‘main.c’ file. Compile with ‘make’ and upload the program to the ATmega328p using ‘make upload’</p>
+<p>Make a new directory ‘bin’ in the same location that the ‘main.c’ file. Compile with ‘make’ and upload the program to the ATmega328Pp using ‘make upload’</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">MCU <span class="o">=</span> atmega328p
 CC <span class="o">=</span> avr-gcc
 OBJCOPY <span class="o">=</span> avr-objcopy
 AVRDUDE <span class="o">=</span> avrdude
 PROGRAMMER <span class="o">=</span> usbtiny
-BAUD <span class="o">=</span> 115200
 CFLAGS <span class="o">=</span> <span class="nt">-Os</span> <span class="nt">-mmcu</span><span class="o">=</span><span class="si">$(</span>MCU<span class="si">)</span>
 LDFLAGS <span class="o">=</span> <span class="nt">-mmcu</span><span class="o">=</span><span class="si">$(</span>MCU<span class="si">)</span>
 TARGET <span class="o">=</span> main
@@ -300,7 +330,7 @@ bin/<span class="si">$(</span>TARGET<span class="si">)</span>.hex: bin/<span cla
 	<span class="si">$(</span>OBJCOPY<span class="si">)</span> <span class="nt">-O</span> ihex <span class="nt">-R</span> .eeprom <span class="nv">$&lt;</span> <span class="nv">$@</span>
 
 upload: bin/<span class="si">$(</span>TARGET<span class="si">)</span>.hex
-	<span class="si">$(</span>AVRDUDE<span class="si">)</span> <span class="nt">-c</span> <span class="si">$(</span>PROGRAMMER<span class="si">)</span> <span class="nt">-p</span> <span class="si">$(</span>MCU<span class="si">)</span> <span class="nt">-B</span> 5 <span class="nt">-U</span> flash:w:<span class="nv">$&lt;</span>:i
+	<span class="si">$(</span>AVRDUDE<span class="si">)</span> <span class="nt">-c</span> <span class="si">$(</span>PROGRAMMER<span class="si">)</span> <span class="nt">-p</span> <span class="si">$(</span>MCU<span class="si">)</span> <span class="nt">-B</span> 5 <span class="nt">-U</span> flash:w:<span class="nv">$&lt;</span>:i <span class="nt">-V</span>
 
 clean:
 	<span class="nb">rm</span> <span class="nt">-f</span> bin/<span class="k">*</span>.o bin/<span class="k">*</span>.elf bin/<span class="k">*</span>.hex
