@@ -101,20 +101,23 @@ nav.site-nav {
   width: 835px !important;
 }
 
-.fading-led-table tr {
-  color: #ffffff !important;
-  background-color: #1c1c1d !important;
-}
-
-.fading-led-table th {
-  color: #ffffff !important;
-  background-color: #1c1c1d !important;
+.adc-serial-atmega-table {
+  width: 750px !important;
 }
 
 table th, table td {
     padding: 4px 10px;
 }
 
+table td {
+  color: #ffffff !important;
+  background-color: #1c1c1d !important;
+}
+
+table th {
+  color: #ffffff !important;
+  background-color: #1c1c1d !important;
+}
 
 /* Target the scrollbar */
 ::-webkit-scrollbar {

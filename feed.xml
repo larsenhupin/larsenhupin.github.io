@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-20T03:47:00+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">ADC and UART on ATmega328P in AVR-C</title><link href="http://localhost:4000/adc-serial-atmega328-avr-c/" rel="alternate" type="text/html" title="ADC and UART on ATmega328P in AVR-C" /><published>2025-08-18T04:00:00+00:00</published><updated>2025-08-18T04:00:00+00:00</updated><id>http://localhost:4000/adc-serial-atmega328-avr-c</id><content type="html" xml:base="http://localhost:4000/adc-serial-atmega328-avr-c/"><![CDATA[<h3 id="analog-to-digital-conversion-and-uart-on-atmega328p-in-avr-c-on-linux">Analog-to-digital conversion and UART on ATmega328P in AVR-C on Linux</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-09-08T00:18:31+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">ADC and UART on ATmega328P in AVR-C</title><link href="http://localhost:4000/adc-serial-atmega328-avr-c/" rel="alternate" type="text/html" title="ADC and UART on ATmega328P in AVR-C" /><published>2025-08-18T04:00:00+00:00</published><updated>2025-08-18T04:00:00+00:00</updated><id>http://localhost:4000/adc-serial-atmega328-avr-c</id><content type="html" xml:base="http://localhost:4000/adc-serial-atmega328-avr-c/"><![CDATA[<h3 id="analog-to-digital-conversion-and-uart-on-atmega328p-in-avr-c-on-linux">Analog-to-digital conversion and UART on ATmega328P in AVR-C on Linux</h3>
 
 <p><img src="../assets/images/adc-serial-atmega328-avr-c/atmega328.jpg" alt="Atmega328 chip" width="550" /></p>
 
@@ -50,7 +50,7 @@ It comes with a gray cable but I don’t like it because you need a breakout boa
 <h2 id="circuit-connections">Circuit connections</h2>
 
 <div class="overflow-container">
-    <table class="fading-led-table">
+    <table class="adc-serial-atmega-table">
         <tr> <th>Component</th> <th>Description</th> </tr>
         <tr> <td>ATmega328P MCU</td> 
         <td>
@@ -258,9 +258,15 @@ Print the serial buffer of your computer using this command:</p>
 
 <h2 id="compile-and-upload">Compile and upload</h2>
 
-<p>Make a new directory ‘bin’ in the same location that the ‘main.c’ file. Compile with ‘make’ and upload the program to the ATmega328Pp using ‘make upload’</p>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">mkdir</span> <span class="n">bin</span>   <span class="c1">// Create a new directory 'bin' in the same location that the 'main.c' file</span>
+<span class="n">make</span>        <span class="c1">// Compile the program using Makefile</span>
+<span class="n">make</span> <span class="n">upload</span> <span class="c1">// Compile and upload the program to the ATmega328P</span>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">MCU <span class="o">=</span> atmega328p
+<span class="c1">// Optional</span>
+<span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">dialout</span> <span class="err">$</span><span class="n">USER</span> <span class="c1">// You may need to give your user permission to use serial devices</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># Makefile</span>
+MCU <span class="o">=</span> atmega328p
 CC <span class="o">=</span> avr-gcc
 OBJCOPY <span class="o">=</span> avr-objcopy
 AVRDUDE <span class="o">=</span> avrdude
@@ -302,7 +308,6 @@ clean:
 #define BRC ((F_CPU / 16 / BUAD) - 1)
 #define TX_BUFFER_SIZE 128
 </span>
-
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
     <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">TX_BUFFER_SIZE</span><span class="p">];</span>
     <span class="kt">uint8_t</span> <span class="n">readPos</span><span class="p">;</span>
