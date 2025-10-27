@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-24T16:40:26+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-09-28T04:22:04+00:00</published><updated>2025-09-28T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="overflow-container">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-27T05:05:44+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-09-28T04:22:04+00:00</published><updated>2025-09-28T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="overflow-container">
 <video autoplay="" muted="" loop="" playsinline="" width="900">
   <source src="../assets/images/serial-graph-in-cplusplus-using-dear-imgui-on-linux/serialgraph.mp4" type="video/mp4" />
 </video>
@@ -48,8 +48,7 @@ In linux everything is a file, so is the serial port.</p>
 #include</span> <span class="cpf">&lt;termios.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="n">fileDescriptor</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/ttyUSB0"</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_NOCTTY</span> <span class="o">|</span> <span class="n">O_NONBLOCK</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">fileDescriptor</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">"open failed for /dev/ttyUSB0: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
-<span class="n">configureTermios</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fileDescriptor</span><span class="p">);</span></code></pre></figure>
+<span class="n">pdaconfigureTermios</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fileDescriptor</span><span class="p">);</span></code></pre></figure>
 
 <h3 id="termios">Termios</h3>
 
@@ -91,30 +90,30 @@ It’s designed to hold multiple channels, although in this example we only use 
 
 <p>Memory for all buffers is dynamically allocated using malloc.</p>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define SERIAL_MAX_TOKEN_LEN 100
-#define SERIAL_MAX_COLUMNS 20
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define SERIAL_MAX_TOKEN_LEN 16
+#define SERIAL_MAX_COLUMNS 8
 #define SERIAL_MAX_LINES 1300
 #define SERIAL_READ_CHUNK_SIZE 256
 </span>
+<span class="k">typedef</span> <span class="kt">char</span> <span class="n">SerialBuffer</span><span class="p">[</span><span class="n">SERIAL_MAX_COLUMNS</span><span class="p">][</span><span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">];</span>
+
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="p">(</span><span class="o">*</span><span class="n">buffer</span><span class="p">)[</span><span class="n">SERIAL_MAX_COLUMNS</span><span class="p">][</span><span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">];</span>
+    <span class="n">SerialBuffer</span> <span class="o">*</span><span class="n">buffer</span><span class="p">;</span>
     <span class="kt">double</span> <span class="o">*</span><span class="n">xAxisData</span><span class="p">;</span>
     <span class="kt">double</span> <span class="o">*</span><span class="n">yAxisData</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">head</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">capacity</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">cols</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">capacity</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">head</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">separator</span><span class="p">;</span>
 <span class="p">}</span> <span class="n">Serial</span><span class="p">;</span>
 
-<span class="kt">void</span> <span class="nf">setupSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>   
+<span class="kt">void</span> <span class="nf">setupSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>    
     <span class="n">memset</span><span class="p">(</span><span class="n">serial</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">serial</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span> <span class="o">=</span> <span class="s">","</span><span class="p">;</span>
     <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span>  <span class="o">=</span> <span class="n">SERIAL_MAX_LINES</span><span class="p">;</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="p">(</span><span class="o">*</span><span class="p">)[</span><span class="n">SERIAL_MAX_COLUMNS</span><span class="p">][</span><span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">])</span> <span class="n">malloc</span><span class="p">(</span><span class="n">SERIAL_MAX_LINES</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">));</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">cols</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">SerialBuffer</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">SERIAL_MAX_LINES</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">cleanSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>
@@ -128,45 +127,33 @@ It’s designed to hold multiple channels, although in this example we only use 
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">readSerialLineRaw</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fileDescriptor</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="k">static</span> <span class="kt">char</span> <span class="n">lineBuffer</span><span class="p">[</span><span class="n">SERIAL_READ_CHUNK_SIZE</span><span class="p">];</span>
-    <span class="k">static</span> <span class="kt">size_t</span> <span class="n">linePosition</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
-    <span class="kt">ssize_t</span> <span class="n">bytesRead</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fileDescriptor</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">));</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="n">SERIAL_READ_CHUNK_SIZE</span><span class="p">];</span>
+    <span class="k">static</span> <span class="kt">size_t</span> <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">readBuffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+    <span class="kt">ssize_t</span> <span class="n">readBufferBytes</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fileDescriptor</span><span class="p">,</span> <span class="n">readBuffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">readBuffer</span><span class="p">));</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">bytesRead</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">readBufferBytes</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        
+        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">readBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'\n'</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">lineBuffer</span><span class="p">[</span><span class="n">linePosition</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span> <span class="c1">// Add null termination </span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">'\n'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">line</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+            <span class="n">position</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">line</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span> <span class="c1">// Add null termination </span>
+            <span class="kt">char</span> <span class="o">*</span><span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span><span class="p">);</span>
 
-            <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span>
-            <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="kt">char</span> <span class="o">*</span><span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">lineBuffer</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span><span class="p">);</span>
-
-            <span class="k">while</span> <span class="p">(</span><span class="n">token</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">SERIAL_MAX_COLUMNS</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">strncpy</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">],</span> <span class="n">token</span><span class="p">,</span> <span class="n">SERIAL_MAX_TOKEN_LEN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
-                <span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">][</span><span class="n">SERIAL_MAX_TOKEN_LEN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">token</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">SERIAL_MAX_COLUMNS</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                
+                <span class="n">snprintf</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">][</span><span class="n">col</span><span class="p">],</span> <span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">,</span> <span class="s">"%s"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+                <span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">][</span><span class="n">col</span><span class="p">][</span><span class="n">SERIAL_MAX_TOKEN_LEN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
                 <span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span><span class="p">);</span>
-                <span class="n">col</span><span class="o">++</span><span class="p">;</span>
-
-                <span class="k">if</span> <span class="p">(</span><span class="n">col</span> <span class="o">&gt;</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">cols</span><span class="p">)</span>
-                    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">cols</span> <span class="o">=</span> <span class="n">col</span><span class="p">;</span>
             <span class="p">}</span>
 
-            <span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span> <span class="c1">// Advance head and count</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">)</span>
-                <span class="n">serial</span><span class="o">-&gt;</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
-
-            <span class="n">linePosition</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Reset line position</span>
-            <span class="k">continue</span><span class="p">;</span>
+            <span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span> <span class="c1">// Advance head using circular buffer</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Reset line position</span>
         <span class="p">}</span>
-        
-        <span class="k">if</span> <span class="p">(</span><span class="n">linePosition</span> <span class="o">&gt;=</span> <span class="n">SERIAL_READ_CHUNK_SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Line buffer overflow</span>
-            <span class="n">linePosition</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="k">continue</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="n">lineBuffer</span><span class="p">[</span><span class="n">linePosition</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -234,12 +221,18 @@ Dear ImGUI is a popular C++ library use for UI. It’s popular in the game indus
     <span class="n">ImFont</span><span class="o">*</span> <span class="n">pFont</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">init</span> <span class="o">=</span> <span class="n">initImGUI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">window</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pFont</span><span class="p">);</span>
 
-    <span class="c1">// ...</span>
+    <span class="c1">// Open serial and setup termios</span>
+    <span class="kt">int</span> <span class="n">fileDescriptor</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/ttyUSB0"</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_NOCTTY</span> <span class="o">|</span> <span class="n">O_NONBLOCK</span><span class="p">);</span>
+    <span class="n">configureTermios</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fileDescriptor</span><span class="p">);</span>
+
+    <span class="c1">// Setup serial</span>
+    <span class="n">Serial</span> <span class="n">serial</span><span class="p">;</span>
+    <span class="n">setupSerial</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serial</span><span class="p">);</span>
 
     <span class="c1">// Main loop</span>
     <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">glfwWindowShouldClose</span><span class="p">(</span><span class="n">window</span><span class="p">))</span> <span class="p">{</span>
         <span class="c1">// Data</span>
-        <span class="n">readSerialLineRaw</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">serial</span><span class="p">,</span> <span class="n">fileDescriptor</span><span class="p">);</span>
+        <span class="n">readSerialLineRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serial</span><span class="p">,</span> <span class="n">fileDescriptor</span><span class="p">);</span>
 
         <span class="c1">// Events</span>
         <span class="n">glfwPollEvents</span><span class="p">();</span>
@@ -267,22 +260,18 @@ Dear ImGUI is a popular C++ library use for UI. It’s popular in the game indus
 
     <span class="c1">// Free memory</span>
     <span class="n">cleanSerial</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serial</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">close</span><span class="p">(</span><span class="n">fileDescriptor</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Error closing fd=%d: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">fileDescriptor</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">fileDescriptor</span><span class="p">);</span>
     <span class="n">cleanIMGUI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">window</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">renderGraphSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">)</span>
-         <span class="n">n</span> <span class="o">=</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">)</span> <span class="o">%</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span>
-        <span class="n">serial</span><span class="o">-&gt;</span><span class="n">doubleListX</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="n">serial</span><span class="o">-&gt;</span><span class="n">doubleListY</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="o">=</span> <span class="n">strtof</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">-</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">)</span> <span class="o">%</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span>
+        <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="o">=</span> <span class="n">strtof</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="n">ImGui</span><span class="o">::</span><span class="n">SetNextWindowPos</span><span class="p">(</span><span class="n">ImVec2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span> <span class="n">ImGuiCond_Always</span><span class="p">);</span>
@@ -302,7 +291,7 @@ Dear ImGUI is a popular C++ library use for UI. It’s popular in the game indus
     <span class="k">if</span> <span class="p">(</span><span class="n">ImPlot</span><span class="o">::</span><span class="n">BeginPlot</span><span class="p">(</span><span class="s">"Graph"</span><span class="p">,</span> <span class="n">ImVec2</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">GetContentRegionAvail</span><span class="p">().</span><span class="n">y</span><span class="p">)))</span> <span class="p">{</span>
         <span class="n">ImPlot</span><span class="o">::</span><span class="n">SetupAxisLimits</span><span class="p">(</span><span class="n">ImAxis_Y1</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">ImGuiCond_Always</span><span class="p">);</span>
         <span class="n">ImPlot</span><span class="o">::</span><span class="n">PushStyleVar</span><span class="p">(</span><span class="n">ImPlotStyleVar_LineWeight</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">);</span>
-        <span class="n">ImPlot</span><span class="o">::</span><span class="n">PlotLine</span><span class="p">(</span><span class="s">"ac0 (mv)"</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">doubleListX</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">doubleListY</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="n">ImPlot</span><span class="o">::</span><span class="n">PlotLine</span><span class="p">(</span><span class="s">"ac0 (mv)"</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">);</span>
         <span class="n">ImPlot</span><span class="o">::</span><span class="n">PopStyleVar</span><span class="p">();</span>
         <span class="n">ImPlot</span><span class="o">::</span><span class="n">EndPlot</span><span class="p">();</span>
     <span class="p">}</span>
