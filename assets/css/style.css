@@ -119,6 +119,10 @@ table th {
   background-color: #1c1c1d !important;
 }
 
+div .code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 /* Target the scrollbar */
 ::-webkit-scrollbar {
   width: 12px;

@@ -73,7 +73,7 @@ More complex graphics, like 3D, became more widely available.</p>
 </ul>
 
 <p>Both are low-level drawing methods and require a decent amount of code to manage pixels.<br />
-Another option is to use a library or a framework that deals with all that complexity and offer ready-to-use components.</p>
+Another option is to use a library or a framework that deals with all that complexity and offer ready-to-use components. And that’s what we’ll do.</p>
 
 <p>The goal of this project is to read serial data from a USB device and display it to a graph using Dear ImGUI.</p>
 
@@ -83,27 +83,24 @@ Another option is to use a library or a framework that deals with all that compl
 
 <h2 id="serial">Serial</h2>
 
-<p>Serial is a communication method that send one bit at a time over a line. A common type is full-duplex with UART where there’s a Transmission line (TX)
-and a Receiving line (RX) that can exchange data at the same time. In this articles series we connect the ATmega328P to the linux computer using a Serial-to-USB
-cable. When we plug the the TTL-232R cable in the computer we can read what is sent on the serial line using this command:</p>
+<p>Serial is a communication method that sends one bit at a time over a line. 
+A common type is full-duplex UART, where there’s a Transmission line (TX) and a Receiving line (RX) that can exchange data at the same time. In this article series, we connect the ATmega328P to the Linux computer using a Serial-to-USB cable. When we plug the TTL-232R cable into the computer we can read what is sent on the serial line using this command:</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">cat</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyUSB0</span> <span class="c1">// cat is to print files, dev is the device folder and tty is a historical reference for teletype</span></code></pre></figure>
 
-<p>We want to read de serial data at the same speed than the <em>cat</em> command. To achieve similar performance we need to use the <em>open()</em> function, 
-a low-level Unix system-call that point into the kernel file descriptor.
-In linux everything is a file, so is the serial port.</p>
+<p>We want to read de serial data at the same speed than the <code class="language-plaintext highlighter-rouge">cat</code> command. To achieve similar performance we need to use the <code class="language-plaintext highlighter-rouge">open()</code> function, 
+a low-level Unix system-call that returns a file descriptor. In linux everything is a file, including the serial port.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;termios.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="n">fileDescriptor</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/ttyUSB0"</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_NOCTTY</span> <span class="o">|</span> <span class="n">O_NONBLOCK</span><span class="p">);</span>
-<span class="n">pdaconfigureTermios</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fileDescriptor</span><span class="p">);</span></code></pre></figure>
+<span class="n">configureTermios</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fileDescriptor</span><span class="p">);</span></code></pre></figure>
 
 <h3 id="termios">Termios</h3>
 
-<p>Termios is a header file that helps configure asynchronous communications ports. We can set the baud rate and other options.
-In our project, we use Raw Input mode to read one byte at a time contrary to Canonical mode that waits for the full line to be processed.</p>
+<p>Termios is a header file that helps configure asynchronous communication ports. We set the baud rate to 9600, disable parity checking, select an 8-bit data size, etc. In our project, we use raw input mode to read one byte at a time, contrary to canonical mode, which waits for a full line before returning.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">configureTermios</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">fileDescriptor</span><span class="p">)</span> <span class="p">{</span>
 
@@ -127,18 +124,15 @@ In our project, we use Raw Input mode to read one byte at a time contrary to Can
     <span class="k">return</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>You should refer to the termios man page for the specification:<br />
-<a href="https://man7.org/linux/man-pages/man3/termios.3.html" target="_blank">https://man7.org/linux/man-pages/man3/termios.3.html</a></p>
-
 <p>I highly suggest Michael R Sweet’s Serial Programming Guide for a complete dive into the subject:<br />
 <a href="https://www.msweet.org/serial/serial.html#1" target="_blank">https://www.msweet.org/serial/serial.html#1</a></p>
 
 <h3 id="data-allocation">Data allocation</h3>
 
-<p>Here is how the data is initialized and allocated. The <em>buffer</em> member acts as a CSV-style data structure with rows and columns.
-It’s designed to hold multiple channels, although in this example we only use one. The <em>xAxisData</em> and <em>yAxisData</em> members store data that will later be used to build the graph. The other fields (such as head, count, and capacity) help manage the data structure and keep track of its state.</p>
+<p>This section show how the data is initialized and allocated. The <code class="language-plaintext highlighter-rouge">buffer</code> member is a CSV-style data structure with rows and columns.
+It’s designed to hold multiple channels, although in this example we only use one. The <code class="language-plaintext highlighter-rouge">xAxisData</code> and <code class="language-plaintext highlighter-rouge">yAxisData</code> members are used to store values that will later be used to build the plot line. The other fields (such as head, count, and capacity) help manage the data structure and keep track of its state.</p>
 
-<p>Memory for all buffers is dynamically allocated using malloc.</p>
+<p>Memory for all buffers is dynamically allocated using <code class="language-plaintext highlighter-rouge">malloc()</code>.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define SERIAL_MAX_TOKEN_LEN 16
 #define SERIAL_MAX_COLUMNS 8
@@ -149,8 +143,8 @@ It’s designed to hold multiple channels, although in this example we only use 
 
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
     <span class="n">SerialBuffer</span> <span class="o">*</span><span class="n">buffer</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="o">*</span><span class="n">xAxisData</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="o">*</span><span class="n">yAxisData</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">xAxisData</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">yAxisData</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">capacity</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">head</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">separator</span><span class="p">;</span>
@@ -162,8 +156,8 @@ It’s designed to hold multiple channels, although in this example we only use 
     <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span> <span class="o">=</span> <span class="s">","</span><span class="p">;</span>
     <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span>  <span class="o">=</span> <span class="n">SERIAL_MAX_LINES</span><span class="p">;</span>
     <span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">SerialBuffer</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">SERIAL_MAX_LINES</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">));</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
-    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">cleanSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>
@@ -173,7 +167,8 @@ It’s designed to hold multiple channels, although in this example we only use 
 <span class="p">}</span></code></pre></figure>
 
 <h3 id="reading-from-serial">Reading from serial</h3>
-<p>We use <em>read()</em> function. Another low-level Unix system-call.</p>
+<p>The <code class="language-plaintext highlighter-rouge">read()</code> function, in this example, reads 64 bytes of data from the serial port. After getting the data, we go through each character one by one and check if it’s not a line return (<code class="language-plaintext highlighter-rouge">'\n'</code>). If it’s not, we add it to a temporary line buffer. Once we get a full line, we start the tokenization process.
+Since we know the format consists of values separated by commas, we can use <code class="language-plaintext highlighter-rouge">strtok()</code> to break the string into a sequence of delimited tokens. We copy the first token into the CSV buffer and look for the next one. If there are no tokens left, we exit the loop and advance the head using a circular method.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">readSerialLineRaw</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fileDescriptor</span><span class="p">)</span> <span class="p">{</span>
 
@@ -191,13 +186,11 @@ It’s designed to hold multiple channels, although in this example we only use 
             <span class="n">position</span><span class="o">++</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="k">else</span> <span class="p">{</span>
-            <span class="n">line</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span> <span class="c1">// Add null termination </span>
             <span class="kt">char</span> <span class="o">*</span><span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span><span class="p">);</span>
 
             <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">token</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">SERIAL_MAX_COLUMNS</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
                 
-                <span class="n">snprintf</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">][</span><span class="n">col</span><span class="p">],</span> <span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">,</span> <span class="s">"%s"</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
-                <span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">][</span><span class="n">col</span><span class="p">][</span><span class="n">SERIAL_MAX_TOKEN_LEN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+                <span class="n">strncpy</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">][</span><span class="n">col</span><span class="p">],</span> <span class="n">token</span><span class="p">,</span> <span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">);</span>
                 <span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span><span class="p">);</span>
             <span class="p">}</span>
 
@@ -214,9 +207,11 @@ It’s designed to hold multiple channels, although in this example we only use 
 
 <h2 id="dear-imgui">Dear ImGUI</h2>
 
-<p>A library (or a framework) is a collection of code that other people wrote and is made so we can add it to our project.
-Dear ImGUI is a popular C++ library use for UI. It’s popular in the game industry because it’s quite complete and use the
-<em>immediate mode</em> technique.</p>
+<p>Dear ImGUI is a popular C++ library for building graphical user interface. It’s used in the game industry because it’s quite complete and use the
+<em>immediate mode</em> paradigm. One of it’s principal is to have only one source of truth for the data being drawn on the screen.
+Another one is to throw out and rebuild the UI on every frame rather than having persitent UI widget. Which differ from <em>retained mode</em> that would use long-lived objects that would decribe the UI state over time.</p>
+
+<h3 id="initialization">Initialization</h3>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">initImGUI</span><span class="p">(</span><span class="n">GLFWwindow</span><span class="o">**</span> <span class="n">window</span><span class="p">,</span> <span class="n">ImFont</span><span class="o">**</span> <span class="n">pFont</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Initialize GLFW</span>
@@ -264,6 +259,8 @@ Dear ImGUI is a popular C++ library use for UI. It’s popular in the game indus
 
     <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
+
+<h3 id="main-loop">Main loop</h3>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Create Window</span>
@@ -315,6 +312,8 @@ Dear ImGUI is a popular C++ library use for UI. It’s popular in the game indus
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
+
+<h3 id="graph-rendering">Graph rendering</h3>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">renderGraphSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>
 
