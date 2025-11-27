@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Serial Graph in C++ using Dear ImGUI on Linux | Sparkland Blog</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Serial Graph in C++ using Dear ImGUI on Linux" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Blog about various projects" />
+<meta property="og:description" content="Blog about various projects" />
+<link rel="canonical" href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" />
+<meta property="og:url" content="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" />
+<meta property="og:site_name" content="Sparkland Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-26T04:22:04+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Serial Graph in C++ using Dear ImGUI on Linux" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-10-26T04:22:04+00:00","datePublished":"2025-10-26T04:22:04+00:00","description":"Blog about various projects","headline":"Serial Graph in C++ using Dear ImGUI on Linux","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"},"url":"http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Sparkland Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Sparkland Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Serial Graph in C++ using Dear ImGUI on Linux</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-10-26T04:22:04+00:00" itemprop="datePublished">Oct 26, 2025
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <div class="overflow-container">
+<video autoplay="" muted="" loop="" playsinline="" width="900">
+  <source src="../assets/images/serial-graph-in-cplusplus-using-dear-imgui-on-linux/serialgraph.mp4" type="video/mp4" />
+</video>
+</div>
+<p><br /></p>
+
+<h2 id="graphics">Graphics</h2>
+
+<p>When deciding to create a graphical user interface (GUI), there are many options to choose from.
+One technique is to write pixel data into a backbuffer and then let the CPU do the rendering.
+This is a technique that worked for a very long time (and still does), but it’s slower to render complex graphics.</p>
+
+<p>In the late 90s, graphics cards started to appear more widely on the market and vendors would ship them with graphics API drivers like OpenGL. 
+More complex graphics, like 3D, became more widely available.</p>
+
+<p>Writing an OpenGL/DirectX renderer means that you call specific GPU functions to draw shapes and colors on the screen.</p>
+
+<ul>
+  <li>CPU rendering - Write pixel data to a backbuffer</li>
+  <li>GPU rendering - Call the graphics card functions to draw shapes and colors</li>
+</ul>
+
+<p>Both are low-level drawing methods and require a decent amount of code to manage pixels.<br />
+Another option is to use a library or a framework that deals with all that complexity and offers ready-to-use components. And that’s what we’ll do.</p>
+
+<p>The goal of this project is to read serial data from a USB device and display it on a graph using Dear ImGUI.</p>
+
+<p>This is the third and final part of a series of articles.</p>
+
+<p>This is the third and final part of a series of articles.<br />
+<a href="https://blog.sparkland.ca/fading-leds-using-555-timer/" target="_blank">Part 1: A Fading LEDs circuit using 555 Timer on Breadboard</a><br />
+<a href="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/" target="_blank">Part 2: ADC and UART on ATmega328P in AVR-C</a></p>
+
+<h2 id="serial">Serial</h2>
+
+<p>Serial is a communication method that sends one bit at a time over a line. A common type is full-duplex UART,
+where there’s a Transmission line (TX) and a Receiving line (RX) that can exchange data at the same time. In this article series, we connect the ATmega328P to the Linux computer using a Serial-to-USB cable. When we plug the TTL-232R cable into the computer, we can read what is sent on the serial line using this command:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">cat</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyUSB0</span> <span class="c1">// cat is to print files, dev is the device folder and tty is a historical reference for teletype</span></code></pre></figure>
+
+<p>We want to read the serial data at the same speed as the <code class="language-plaintext highlighter-rouge">cat</code> command. To achieve similar performance, we need to use the <code class="language-plaintext highlighter-rouge">open()</code> function, 
+a low-level Unix system call that returns a file descriptor. In Linux, everything is a file, including the serial port.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;termios.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="n">fileDescriptor</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/ttyUSB0"</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_NOCTTY</span> <span class="o">|</span> <span class="n">O_NONBLOCK</span><span class="p">);</span>
+<span class="n">configureTermios</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fileDescriptor</span><span class="p">);</span></code></pre></figure>
+
+<h3 id="termios">Termios</h3>
+
+<p>Termios is a header file that helps configure asynchronous communication ports. We set the baud rate to 9600, disable parity checking, select an 8-bit data size, etc. In our project, we use raw input mode to read one byte at a time, as oppose to canonical mode, which waits for a full line before returning.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">configureTermios</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">fileDescriptor</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">struct</span> <span class="n">termios</span> <span class="n">options</span><span class="p">;</span>
+    <span class="n">tcgetattr</span><span class="p">(</span><span class="o">*</span><span class="n">fileDescriptor</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">options</span><span class="p">);</span>               <span class="c1">// Get the current options</span>
+    <span class="n">cfsetispeed</span><span class="p">(</span><span class="o">&amp;</span><span class="n">options</span><span class="p">,</span> <span class="n">B9600</span><span class="p">);</span>                       <span class="c1">// Set input baud rate to 9600</span>
+    <span class="n">cfsetospeed</span><span class="p">(</span><span class="o">&amp;</span><span class="n">options</span><span class="p">,</span> <span class="n">B9600</span><span class="p">);</span>                       <span class="c1">// Set output baud rate to 9600</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cflag</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">PARENB</span><span class="p">;</span>                         <span class="c1">// Disable parity checking</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cflag</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">CSTOPB</span><span class="p">;</span>                         <span class="c1">// Use 1 stop bit</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cflag</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">CSIZE</span><span class="p">;</span>                          <span class="c1">// Mask the character size</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cflag</span> <span class="o">|=</span> <span class="n">CS8</span><span class="p">;</span>                             <span class="c1">// Select 8-bit data size</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cflag</span> <span class="o">|=</span> <span class="p">(</span><span class="n">CLOCAL</span> <span class="o">|</span> <span class="n">CREAD</span><span class="p">);</span>                <span class="c1">// Enable receiver and ignore modem control lines</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cflag</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">CRTSCTS</span><span class="p">;</span>                        <span class="c1">// Disable hardware flow control</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_lflag</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="n">ICANON</span> <span class="o">|</span> <span class="n">ECHO</span> <span class="o">|</span> <span class="n">ECHOE</span> <span class="o">|</span> <span class="n">ISIG</span><span class="p">);</span> <span class="c1">// Disable canonical, echoing, signal generation (raw input)</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_iflag</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="n">IXON</span> <span class="o">|</span> <span class="n">IXOFF</span> <span class="o">|</span> <span class="n">IXANY</span><span class="p">);</span>         <span class="c1">// Disable software flow control</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_oflag</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">OPOST</span><span class="p">;</span>                          <span class="c1">// Select raw output</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cc</span><span class="p">[</span><span class="n">VMIN</span><span class="p">]</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                            <span class="c1">// Return immediately if data is available</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">c_cc</span><span class="p">[</span><span class="n">VTIME</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>                           <span class="c1">// Return 0 if no data arrives within 1 second</span>
+    <span class="n">tcsetattr</span><span class="p">(</span><span class="o">*</span><span class="n">fileDescriptor</span><span class="p">,</span> <span class="n">TCSANOW</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">options</span><span class="p">);</span>      <span class="c1">// Set the new options</span>
+
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>I highly suggest Michael R. Sweet’s Serial Programming Guide for a complete dive into the subject:<br />
+<a href="https://www.msweet.org/serial/serial.html#1" target="_blank">https://www.msweet.org/serial/serial.html#1</a></p>
+
+<h3 id="data-allocation">Data allocation</h3>
+
+<p>This section shows how the data is initialized and allocated. The <code class="language-plaintext highlighter-rouge">buffer</code> member is a CSV-style data structure with rows and columns.
+It’s designed to hold multiple channels, although in this example we only use one. The <code class="language-plaintext highlighter-rouge">xAxisData</code> and <code class="language-plaintext highlighter-rouge">yAxisData</code> members are used to store values that will later be used to build the plot line. The other fields (such as head, count, and capacity) help manage the data structure and keep track of its state.</p>
+
+<p>Memory for all buffers is dynamically allocated using <code class="language-plaintext highlighter-rouge">malloc()</code>.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define SERIAL_MAX_TOKEN_LEN 16
+#define SERIAL_MAX_COLUMNS 8
+#define SERIAL_MAX_LINES 1300
+#define SERIAL_READ_CHUNK_SIZE 256
+</span>
+<span class="k">typedef</span> <span class="kt">char</span> <span class="n">SerialBuffer</span><span class="p">[</span><span class="n">SERIAL_MAX_COLUMNS</span><span class="p">][</span><span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">];</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">SerialBuffer</span> <span class="o">*</span><span class="n">buffer</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">xAxisData</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">yAxisData</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">capacity</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">head</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">separator</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">Serial</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setupSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>    
+    <span class="n">memset</span><span class="p">(</span><span class="n">serial</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">serial</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span> <span class="o">=</span> <span class="s">","</span><span class="p">;</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span>  <span class="o">=</span> <span class="n">SERIAL_MAX_LINES</span><span class="p">;</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">SerialBuffer</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">SERIAL_MAX_LINES</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">cleanSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="reading-from-serial">Reading from serial</h3>
+<p>The <code class="language-plaintext highlighter-rouge">read()</code> function, in this example, reads 64 bytes of data from the serial port. After getting the data, the program goes through each character one by one and checks if it’s not a line return (<code class="language-plaintext highlighter-rouge">'\n'</code>). If it’s not, it adds it to a temporary line buffer. Once it gets a full line, the tokenization process starts.
+Since we know the format consists of integer values separated by commas, we use <code class="language-plaintext highlighter-rouge">strtok()</code> to break the string into a sequence of delimited tokens. We copy the first token into the CSV buffer and look for the next one. If there are no tokens left, we exit the loop and advance <code class="language-plaintext highlighter-rouge">head</code> using a circular buffer method.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">readSerialLineRaw</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fileDescriptor</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="n">SERIAL_READ_CHUNK_SIZE</span><span class="p">];</span>
+    <span class="k">static</span> <span class="kt">size_t</span> <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">readBuffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+    <span class="kt">ssize_t</span> <span class="n">readBufferBytes</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fileDescriptor</span><span class="p">,</span> <span class="n">readBuffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">readBuffer</span><span class="p">));</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">readBufferBytes</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        
+        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">readBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">'\n'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">line</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+            <span class="n">position</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="kt">char</span> <span class="o">*</span><span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span><span class="p">);</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">token</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">SERIAL_MAX_COLUMNS</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                
+                <span class="n">strncpy</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">][</span><span class="n">col</span><span class="p">],</span> <span class="n">token</span><span class="p">,</span> <span class="n">SERIAL_MAX_TOKEN_LEN</span><span class="p">);</span>
+                <span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">separator</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span> <span class="c1">// Advance head using circular buffer</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Reset line position</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><br /></p>
+
+<hr />
+<p><br /></p>
+
+<h2 id="dear-imgui">Dear ImGUI</h2>
+
+<p>Dear ImGUI is a popular C++ library for building graphical user interfaces. It’s used in the game industry because it’s quite complete and uses immediate mode. To explain this paradigm, let me quote the creator of Dear ImGUI:</p>
+
+<blockquote>
+  <p>“On every update you take your data and reflect it as UI, meaning the UI always reflects the current state of the data.”<br />
+— <strong>Omar Cornut</strong><br />
+<em>(source: <a href="https://youtu.be/2KPUMvyUMzM?si=bG_5STy68Rgiw1lq" target="_blank">https://youtu.be/2KPUMvyUMzM?si=bG_5STy68Rgiw1lq</a>)</em></p>
+</blockquote>
+
+<p>In other words, it encourages having only one source of truth for the data being drawn on the screen. When using immediate mode, the UI is thrown out and rebuilt every frame rather than having persistent UI widgets. On the other side of the spectrum, there’s retained mode that uses long-lived objects to describe the UI state over time.</p>
+
+<h3 id="initialization">Initialization</h3>
+
+<p>We initialize GLFW which is another library used to create a window and an OpenGL context. Then we initialize ImGUI and add some fonts.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">initImGUI</span><span class="p">(</span><span class="n">GLFWwindow</span><span class="o">**</span> <span class="n">window</span><span class="p">,</span> <span class="n">ImFont</span><span class="o">**</span> <span class="n">pFont</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Initialize GLFW</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">glfwInit</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"ERROR: Failed to initialize GLFW </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+   
+    <span class="c1">// Create a window</span>
+    <span class="n">GLFWmonitor</span><span class="o">*</span> <span class="n">monitor</span> <span class="o">=</span> <span class="n">glfwGetPrimaryMonitor</span><span class="p">();</span>
+    <span class="k">const</span> <span class="n">GLFWvidmode</span><span class="o">*</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">glfwGetVideoMode</span><span class="p">(</span><span class="n">monitor</span><span class="p">);</span>
+    <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="n">glfwCreateWindow</span><span class="p">(</span><span class="n">mode</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">mode</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="s">"Sparkland"</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">glfwSetWindowAttrib</span><span class="p">(</span><span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="n">GLFW_DECORATED</span><span class="p">,</span> <span class="n">GLFW_TRUE</span><span class="p">);</span>
+    <span class="n">glfwSetWindowPos</span><span class="p">(</span><span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!*</span><span class="n">window</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">glfwTerminate</span><span class="p">();</span>
+	    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">glfwMakeContextCurrent</span><span class="p">(</span><span class="o">*</span><span class="n">window</span><span class="p">);</span>
+
+    <span class="c1">// Initialize OpenGL loader</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">glewInit</span><span class="p">()</span> <span class="o">!=</span> <span class="n">GLEW_OK</span><span class="p">)</span> <span class="p">{</span>
+    	<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"ERROR: Failed to initialize OpenGL loader (GLEW) </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Initialize ImGui</span>
+    <span class="n">IMGUI_CHECKVERSION</span><span class="p">();</span>
+    <span class="n">ImGui</span><span class="o">::</span><span class="n">CreateContext</span><span class="p">();</span>
+    <span class="n">ImGuiIO</span><span class="o">&amp;</span> <span class="n">io</span> <span class="o">=</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">GetIO</span><span class="p">();</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">io</span><span class="p">;</span>
+
+    <span class="o">*</span><span class="n">pFont</span> <span class="o">=</span> <span class="n">io</span><span class="p">.</span><span class="n">Fonts</span><span class="o">-&gt;</span><span class="n">AddFontFromFileTTF</span><span class="p">(</span><span class="s">"libs/asset/font/Roboto-Regular.ttf"</span><span class="p">,</span> <span class="mi">18</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">);</span>
+    <span class="n">ImGui</span><span class="o">::</span><span class="n">StyleColorsDark</span><span class="p">();</span>
+
+    <span class="c1">// Setup Platform/Renderer bindings</span>
+    <span class="n">ImGui_ImplGlfw_InitForOpenGL</span><span class="p">(</span><span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">ImGui_ImplOpenGL3_Init</span><span class="p">(</span><span class="s">"#version 330"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ImPlot</span><span class="o">::</span><span class="n">CreateContext</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="main-loop">Main loop</h3>
+
+<p>In the main loop that’s where we read the data and draw the UI.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Create Window</span>
+    <span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">window</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">ImFont</span><span class="o">*</span> <span class="n">pFont</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">init</span> <span class="o">=</span> <span class="n">initImGUI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">window</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pFont</span><span class="p">);</span>
+
+    <span class="c1">// Open serial and setup termios</span>
+    <span class="kt">int</span> <span class="n">fileDescriptor</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/ttyUSB0"</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_NOCTTY</span> <span class="o">|</span> <span class="n">O_NONBLOCK</span><span class="p">);</span>
+    <span class="n">configureTermios</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fileDescriptor</span><span class="p">);</span>
+
+    <span class="c1">// Setup serial</span>
+    <span class="n">Serial</span> <span class="n">serial</span><span class="p">;</span>
+    <span class="n">setupSerial</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serial</span><span class="p">);</span>
+
+    <span class="c1">// Main loop</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">glfwWindowShouldClose</span><span class="p">(</span><span class="n">window</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// Data</span>
+        <span class="n">readSerialLineRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serial</span><span class="p">,</span> <span class="n">fileDescriptor</span><span class="p">);</span>
+
+        <span class="c1">// Events</span>
+        <span class="n">glfwPollEvents</span><span class="p">();</span>
+
+        <span class="c1">// Start ImGui frame</span>
+        <span class="n">ImGui_ImplOpenGL3_NewFrame</span><span class="p">();</span>
+        <span class="n">ImGui_ImplGlfw_NewFrame</span><span class="p">();</span>
+        <span class="n">ImGui</span><span class="o">::</span><span class="n">NewFrame</span><span class="p">();</span>
+        
+        <span class="c1">// Window title</span>
+        <span class="kt">char</span> <span class="n">title</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+        <span class="n">snprintf</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">title</span><span class="p">),</span> <span class="s">"Serial - FPS: %.1f"</span><span class="p">,</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">GetIO</span><span class="p">().</span><span class="n">Framerate</span><span class="p">);</span>
+        <span class="n">glfwSetWindowTitle</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">title</span><span class="p">);</span>
+
+        <span class="c1">// Body</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">renderToolbar</span><span class="p">())</span> <span class="n">printf</span><span class="p">(</span><span class="s">"Error: renderToolbar failed"</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">renderGraphSerial</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serial</span><span class="p">))</span> <span class="n">printf</span><span class="p">(</span><span class="s">"Error: renderGraphSerial failed"</span><span class="p">);</span>
+
+        <span class="c1">// Rendering</span>
+        <span class="n">ImGui</span><span class="o">::</span><span class="n">Render</span><span class="p">();</span>
+        <span class="n">glClear</span><span class="p">(</span><span class="n">GL_COLOR_BUFFER_BIT</span><span class="p">);</span>
+        <span class="n">ImGui_ImplOpenGL3_RenderDrawData</span><span class="p">(</span><span class="n">ImGui</span><span class="o">::</span><span class="n">GetDrawData</span><span class="p">());</span>
+        <span class="n">glfwSwapBuffers</span><span class="p">(</span><span class="n">window</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Free memory</span>
+    <span class="n">cleanSerial</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serial</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">fileDescriptor</span><span class="p">);</span>
+    <span class="n">cleanIMGUI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">window</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="graph-rendering">Graph rendering</h3>
+
+<p>Here is the code used to build the graph.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">renderGraphSerial</span><span class="p">(</span><span class="n">Serial</span> <span class="o">*</span><span class="n">serial</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">-</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">)</span> <span class="o">%</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">;</span>
+        <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="o">=</span> <span class="n">strtof</span><span class="p">(</span><span class="n">serial</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">ImGui</span><span class="o">::</span><span class="n">SetNextWindowPos</span><span class="p">(</span><span class="n">ImVec2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span> <span class="n">ImGuiCond_Always</span><span class="p">);</span>
+    <span class="n">ImGui</span><span class="o">::</span><span class="n">SetNextWindowSize</span><span class="p">(</span><span class="n">ImVec2</span><span class="p">(</span>
+                                    <span class="n">ImGui</span><span class="o">::</span><span class="n">GetIO</span><span class="p">().</span><span class="n">DisplaySize</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span>
+                                    <span class="n">ImGui</span><span class="o">::</span><span class="n">GetIO</span><span class="p">().</span><span class="n">DisplaySize</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="mi">70</span><span class="p">),</span>
+                                    <span class="n">ImGuiCond_Always</span><span class="p">);</span>
+    <span class="n">ImGui</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="s">"plot_container"</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+                 <span class="n">ImGuiWindowFlags_NoMove</span> <span class="o">|</span>
+                 <span class="n">ImGuiWindowFlags_NoCollapse</span> <span class="o">|</span>
+                 <span class="n">ImGuiWindowFlags_NoResize</span> <span class="o">|</span>
+                 <span class="n">ImGuiWindowFlags_NoTitleBar</span><span class="p">);</span>
+
+    <span class="kt">double</span> <span class="n">y_min</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">y_max</span> <span class="o">=</span> <span class="mi">2600</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">ImPlot</span><span class="o">::</span><span class="n">BeginPlot</span><span class="p">(</span><span class="s">"Graph"</span><span class="p">,</span> <span class="n">ImVec2</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">GetContentRegionAvail</span><span class="p">().</span><span class="n">y</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="n">ImPlot</span><span class="o">::</span><span class="n">SetupAxisLimits</span><span class="p">(</span><span class="n">ImAxis_Y1</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">ImGuiCond_Always</span><span class="p">);</span>
+        <span class="n">ImPlot</span><span class="o">::</span><span class="n">PushStyleVar</span><span class="p">(</span><span class="n">ImPlotStyleVar_LineWeight</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">);</span>
+        <span class="n">ImPlot</span><span class="o">::</span><span class="n">PlotLine</span><span class="p">(</span><span class="s">"ac0 (mv)"</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">xAxisData</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">yAxisData</span><span class="p">,</span> <span class="n">serial</span><span class="o">-&gt;</span><span class="n">capacity</span><span class="p">);</span>
+        <span class="n">ImPlot</span><span class="o">::</span><span class="n">PopStyleVar</span><span class="p">();</span>
+        <span class="n">ImPlot</span><span class="o">::</span><span class="n">EndPlot</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="makefile">Makefile</h2>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># Makefile</span>
+CXX <span class="o">=</span> g++
+CXXFLAGS <span class="o">=</span> <span class="nt">-O0</span> <span class="nt">-g</span> <span class="nt">-Ilibs</span>/imgui <span class="nt">-Ilibs</span>/backends <span class="nt">-Ilibs</span>/implot <span class="nt">-MMD</span> <span class="nt">-MP</span>
+LDFLAGS <span class="o">=</span> <span class="nt">-lglfw</span> <span class="nt">-lGL</span> <span class="nt">-lGLEW</span>
+TARGET <span class="o">=</span> main
+IMGUI_SRC    <span class="o">=</span> <span class="si">$(</span>wildcard libs/imgui/<span class="k">*</span>.cpp<span class="si">)</span>
+BACKEND_SRC  <span class="o">=</span> libs/backends/imgui_impl_glfw.cpp libs/backends/imgui_impl_opengl3.cpp
+IMPLOT_SRC   <span class="o">=</span> libs/implot/implot.cpp libs/implot/implot_items.cpp
+CORE_SRC     <span class="o">=</span> core.cpp
+VIEW_SRC     <span class="o">=</span> view.cpp
+SRC <span class="o">=</span> <span class="si">$(</span>IMGUI_SRC<span class="si">)</span> <span class="si">$(</span>BACKEND_SRC<span class="si">)</span> <span class="si">$(</span>IMPLOT_SRC<span class="si">)</span> <span class="si">$(</span>CORE_SRC<span class="si">)</span> <span class="si">$(</span>VIEW_SRC<span class="si">)</span>
+OBJ <span class="o">=</span> <span class="si">$(</span>patsubst %.cpp, bin/%.o, <span class="si">$(</span>SRC<span class="si">))</span>
+DEP <span class="o">=</span> <span class="si">$(</span>OBJ:.o<span class="o">=</span>.d<span class="si">)</span>
+
+all: <span class="si">$(</span>TARGET<span class="si">)</span>
+
+<span class="si">$(</span>TARGET<span class="si">)</span>: <span class="si">$(</span>OBJ<span class="si">)</span>
+	<span class="si">$(</span>CXX<span class="si">)</span> <span class="si">$(</span>CXXFLAGS<span class="si">)</span> <span class="nv">$^</span> <span class="si">$(</span>LDFLAGS<span class="si">)</span> <span class="nt">-o</span> <span class="nv">$@</span>
+
+bin/%.o: %.cpp
+	<span class="nb">mkdir</span> <span class="nt">-p</span> <span class="si">$(</span><span class="nb">dir</span> <span class="nv">$@</span><span class="si">)</span>
+	<span class="si">$(</span>CXX<span class="si">)</span> <span class="si">$(</span>CXXFLAGS<span class="si">)</span> <span class="nt">-c</span> <span class="nv">$&lt;</span> <span class="nt">-o</span> <span class="nv">$@</span>
+
+clean:
+	<span class="nb">rm</span> <span class="nt">-rf</span> bin/<span class="k">*</span> <span class="si">$(</span>TARGET<span class="si">)</span>
+
+<span class="nt">-include</span> <span class="si">$(</span>DEP<span class="si">)</span>
+
+.PHONY: all clean</code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="resources">Resources</h2>
+
+<p>Full code: <a href="https://github.com/larsenhupin/SerialGraph" target="_blank">https://github.com/larsenhupin/SerialGraph</a><br />
+Dear ImGUI: <a href="https://github.com/ocornut/imgui" target="_blank">https://github.com/ocornut/imgui</a>
+<br /></p>
+
+  </div><a class="u-url" href="/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Sparkland Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Sparkland Blog</li><li><a class="u-email" href="mailto:antoine.dubreuil@sparkland.ca">antoine.dubreuil@sparkland.ca</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/larsenhupin"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">larsenhupin</span></a></li><li><a href="https://www.twitter.com/antoinedubreuiI"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">antoinedubreuiI</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog about various projects</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
