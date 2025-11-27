@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-27T17:12:52+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="overflow-container">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-27T18:37:25+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="overflow-container">
 <video autoplay="" muted="" loop="" playsinline="" width="900">
-  <source src="../assets/images/serial-graph-in-cplusplus-using-dear-imgui-on-linux/serialgraph.mp4" type="video/mp4" />
+  <source src="../assets/images/2025-09-28-serial-graph-in-cplusplus-using-dear-imgui-on-linux/serialgraph.mp4" type="video/mp4" />
 </video>
 </div>
 <p><br /></p>
@@ -342,6 +342,13 @@ clean:
 
 .PHONY: all clean</code></pre></figure>
 
+<p><br /></p>
+
+<div class="overflow-container">
+<video controls="" autoplay="" muted="" width="630">
+  <source src="../assets/images/2025-09-28-serial-graph-in-cplusplus-using-dear-imgui-on-linux/adc-serial-graph_compress.mp4" type="video/mp4" />
+</video>
+</div>
 <p><br /></p>
 
 <h2 id="resources">Resources</h2>
