@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-28T04:32:19+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="overflow-container">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-28T05:02:13+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="overflow-container">
 <video muted="" loop="" playsinline="" width="900">
   <source src="../assets/images/2025-09-28-serial-graph-in-cplusplus-using-dear-imgui-on-linux/serial-graph.mp4" type="video/mp4" />
 </video>
@@ -8,23 +8,23 @@
 <h2 id="graphics">Graphics</h2>
 
 <p>When deciding to create a graphical user interface (GUI), there are many options to choose from.
-One technique is to write pixel data into a backbuffer and then let the CPU do the rendering.
+One way is to write pixel data into a backbuffer and then let the CPU do the rendering.
 This is a technique that worked for a very long time (and still does), but it’s slower to render complex graphics.</p>
 
 <p>In the late 90s, graphics cards started to appear more widely on the market and vendors would ship them with graphics API drivers like OpenGL. 
-More complex graphics, like 3D, became more widely available.</p>
+Complex graphics, like 3D, became more widely available.</p>
 
 <p>Writing an OpenGL/DirectX renderer means that you call specific GPU functions to draw shapes and colors on the screen.</p>
 
 <ul>
   <li>CPU rendering - Write pixel data to a backbuffer</li>
-  <li>GPU rendering - Call the graphics card functions to draw shapes and colors</li>
+  <li>GPU rendering - Call the graphics card functions</li>
 </ul>
 
-<p>Both are low-level drawing methods and require a decent amount of code to manage pixels.<br />
-Another option is to use a library or a framework that deals with all that complexity and offers ready-to-use components. And that’s what we’ll do.</p>
+<p>Both are low-level drawing methods and require a decent amount of code.  <br />
+Another option is to use a library or a framework that deals with all that complexity and offers ready-to-use components.</p>
 
-<p>The goal of this project is to read serial data from a USB device and display it on a graph using Dear ImGUI.</p>
+<p>The project is to read serial data from a USB device and display it on a graph using Dear ImGUI.</p>
 
 <p>This is the third and final part of a series of articles.<br />
 <a href="https://blog.sparkland.ca/fading-leds-using-555-timer/" target="_blank">Part 1: A Fading LEDs circuit using 555 Timer on Breadboard</a><br />
@@ -33,12 +33,13 @@ Another option is to use a library or a framework that deals with all that compl
 <h2 id="serial">Serial</h2>
 
 <p>Serial is a communication method that sends one bit at a time over a line. A common type is full-duplex UART,
-where there’s a Transmission line (TX) and a Receiving line (RX) that can exchange data at the same time. In this article series, we connect the ATmega328P to the Linux computer using a Serial-to-USB cable. When we plug the TTL-232R cable into the computer, we can read what is sent on the serial line using this command:</p>
+where there’s a Transmission line (TX) and a Receiving line (RX) that can exchange data at the same time. In this article series, we connect the ATmega328P to the Linux computer using a Serial-to-USB cable. When we plug the TTL-232R cable into the computer, we are able to read what is sent on the serial line using this command:</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">cat</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyUSB0</span> <span class="c1">// cat is to print files, dev is the device folder and tty is a historical reference for teletype</span></code></pre></figure>
 
-<p>We want to read the serial data at the same speed as the <code class="language-plaintext highlighter-rouge">cat</code> command. To achieve similar performance, we need to use the <code class="language-plaintext highlighter-rouge">open()</code> function, 
-a low-level Unix system call that returns a file descriptor. In Linux, everything is a file, including the serial port.</p>
+<p>We want to write a program in C that read the serial data at a similar speed as the <code class="language-plaintext highlighter-rouge">cat</code> command. 
+To achieve similar performance, we need to use the <code class="language-plaintext highlighter-rouge">open()</code> function. It’s a a low-level Unix system call that returns a file descriptor.
+In Linux, everything is a file, so is the serial port.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
@@ -49,7 +50,8 @@ a low-level Unix system call that returns a file descriptor. In Linux, everythin
 
 <h3 id="termios">Termios</h3>
 
-<p>Termios is a header file that helps configure asynchronous communication ports. We set the baud rate to 9600, disable parity checking, select an 8-bit data size, etc. In our project, we use raw input mode to read one byte at a time, as oppose to canonical mode, which waits for a full line before returning.</p>
+<p>Termios is a header file that helps configure communication ports on Linux.
+We set the baud rate to 9600, disable parity checking, select an 8-bit data size, etc. In our project, we use raw input mode to read one byte at a time, as oppose to canonical mode, which waits for a full line.</p>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">configureTermios</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">fileDescriptor</span><span class="p">)</span> <span class="p">{</span>
 
@@ -79,7 +81,7 @@ a low-level Unix system call that returns a file descriptor. In Linux, everythin
 <h3 id="data-allocation">Data allocation</h3>
 
 <p>This section shows how the data is initialized and allocated. The <code class="language-plaintext highlighter-rouge">buffer</code> member is a CSV-style data structure with rows and columns.
-It’s designed to hold multiple channels, although in this example we only use one. The <code class="language-plaintext highlighter-rouge">xAxisData</code> and <code class="language-plaintext highlighter-rouge">yAxisData</code> members are used to store values that will later be used to build the plot line. The other fields (such as head, count, and capacity) help manage the data structure and keep track of its state.</p>
+It’s designed to hold multiple channels, although in this example we only use one. The <code class="language-plaintext highlighter-rouge">xAxisData</code> and <code class="language-plaintext highlighter-rouge">yAxisData</code> members are used to store values that will later be used to build the line graph. The other fields (such as head, count, and capacity) help manage the data structure and keep track of its state.</p>
 
 <p>Memory for all buffers is dynamically allocated using <code class="language-plaintext highlighter-rouge">malloc()</code>.</p>
 
