@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-28T17:34:46+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<!-- <div class="overflow-container">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-30T22:31:35+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<!-- <div class="overflow-container">
 <video muted loop playsinline width="900">
   <source src="../assets/images/2025-09-28-serial-graph-in-cplusplus-using-dear-imgui-on-linux/serial-graph.mp4" type="video/mp4">
 </video>
@@ -25,7 +25,9 @@ Complex graphics, like 3D, became more widely available.</p>
 <p>Both are low-level drawing methods and require a decent amount of code.  <br />
 Another option is to use a library or a framework that deals with all that complexity and offers ready-to-use components.</p>
 
-<p>The project is to read serial data from a USB device and display it on a graph using Dear ImGUI.</p>
+<h2 id="goal">Goal</h2>
+
+<p>The project goal is to read serial data from a USB device and display it on a graph in real time using Dear ImGUI.</p>
 
 <p>This is the third and final part of a series of articles.<br />
 <a href="https://blog.sparkland.ca/fading-leds-using-555-timer/" target="_blank">Part 1: A Fading LEDs circuit using 555 Timer on Breadboard</a><br />
@@ -158,7 +160,7 @@ Since we know the format consists of integer values separated by commas, we use 
 
 <p>We are using a circuit with a 555 timer that produce a saw wave and another with an ATmega328p that read the signal and send it to the computer via serial.</p>
 
-<p><img src="../assets/images/2025-09-28-serial-graph-in-cplusplus-using-dear-imgui-on-linux/atmega328p-555timer.jpg" width="500" /><br />
+<p><img src="../assets/images/2025-09-28-serial-graph-in-cplusplus-using-dear-imgui-on-linux/atmega328p-555timer.jpg" width="550" /><br />
 <br /></p>
 
 <hr />
@@ -169,9 +171,9 @@ Since we know the format consists of integer values separated by commas, we use 
 <p>Dear ImGUI is a popular C++ library for building graphical user interfaces. It’s used in the game industry because it’s quite complete and uses immediate mode. To explain this paradigm, let me quote the creator of Dear ImGUI:</p>
 
 <blockquote>
-  <p>“On every update you take your data and reflect it as UI, meaning the UI always reflects the current state of the data.”<br />
+  <p>“On every update you take your data and reflect it as UI, meaning the UI always reflects the actual data, the current state of it.”
 — <strong>Omar Cornut</strong><br />
-<em>(source: <a href="https://youtu.be/2KPUMvyUMzM?si=bG_5STy68Rgiw1lq" target="_blank">https://youtu.be/2KPUMvyUMzM?si=bG_5STy68Rgiw1lq</a>)</em></p>
+<em>(source: <a href="https://youtu.be/2KPUMvyUMzM?si=bLImxO5p07JcYwRI&amp;t=2271" target="_blank">https://youtu.be/2KPUMvyUMzM?si=bG_5STy68Rgiw1lq</a>)</em></p>
 </blockquote>
 
 <p>In other words, it encourages having only one source of truth for the data being drawn on the screen. When using immediate mode, the UI is thrown out and rebuilt every frame rather than having persistent UI widgets. On the other side of the spectrum, there’s retained mode that uses long-lived objects to describe the UI state over time.</p>
