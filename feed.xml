@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-01T01:29:49+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<!-- <div class="overflow-container">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-01T02:20:10+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<!-- <div class="overflow-container">
 <video muted loop playsinline width="900">
   <source src="../assets/images/2025-09-28-serial-graph-in-cplusplus-using-dear-imgui-on-linux/serial-graph.mp4" type="video/mp4">
 </video>
@@ -859,7 +859,7 @@ clean:
 
 <div class="overflow-container">
 <video autoplay="" muted="" loop="" playsinline="" width="630">
-  <source src="../assets/images/fading-led-using-555-timer/555timer.mp4" type="video/mp4" />
+  <source src="../assets/images/fading-led-using-555-timer/loop.mp4" type="video/mp4" />
 </video>
 </div>
 <p><br /></p>
@@ -917,7 +917,7 @@ The multimeter is useful to capture voltage in your circuit and it can also be u
 </div>
 
 <h2 id="pinout">Pinout</h2>
-<p><img src="../assets/images/fading-led-using-555-timer/555TimerPinout.png" alt="555 Timer Pinout" /> <img src="../assets/images/fading-led-using-555-timer/transistor.png" alt="Transistor Pinout" /><br /><br /></p>
+<p><img src="../assets/images/fading-led-using-555-timer/555TimerPinout.png" alt="555 Timer Pinout" /> <img id="transistor_pinout_img" src="../assets/images/fading-led-using-555-timer/transistor.png" alt="Transistor Pinout" /><br /><br /></p>
 
 <h2 id="resource">Resource</h2>
 
