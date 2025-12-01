@@ -92,7 +92,12 @@ nav.site-nav {
   background-color: #1c1c1d;
 }
 
+.post-header {
+  margin-bottom: 15px !important;
+}
+
 .post-meta {
+  /* margin-bottom: 0px !important; */
   color: #a1a1a1;
 }
 
@@ -125,6 +130,13 @@ table td {
 table th {
   color: #ffffff !important;
   background-color: #1c1c1d !important;
+}
+
+.previous-next-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 15px; 
 }
 
 
