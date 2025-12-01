@@ -50,7 +50,7 @@
   <div class="post-content e-content" itemprop="articleBody">
     <h3 id="analog-to-digital-conversion-and-uart-on-atmega328p-in-avr-c-on-linux">Analog-to-digital conversion and UART on ATmega328P in AVR-C on Linux</h3>
 
-<p><img src="../assets/images/adc-serial-atmega328-avr-c/atmega328.jpg" alt="Atmega328 chip" width="550" /></p>
+<p><img src="../assets/images/adc-serial-atmega328-avr-c/atmega328p.jpg" alt="Atmega328 chip" width="550" /></p>
 
 <h2 id="atmega328p">ATmega328P</h2>
 <p>The ATmega328P is a Microcontroller Unit used for timing, analog-to-digital conversion, serial communication, PWM, etc. If you have an Arduino UNO, it’s the chip on that board. You can use it for various purposes like a temperature sensor or a controller for DC motors.</p>
@@ -121,10 +121,15 @@ It comes with a gray cable but I don’t like it because you need a breakout boa
             </ul>
         </td>
         </tr>
-        <tr> <td>16 MHz crystal</td> <td> Clock. Connected between pin 9 &amp; 10. </td> </tr>
-        <tr> <td>22 pF ceramic capacitor</td> <td> Between GND pin 9. Stabilize crystal oscillation. </td> </tr>
-        <tr> <td>22 pF ceramic capacitor</td> <td> Between GND pin 10. Stabilize crystal oscillation. </td> </tr>
         <tr> <td>10 kΩ resistor</td> <td> Connected to pin 1. </td> </tr>
+        <tr> <td>16 MHz crystal</td> <td> Clock. Connected between pin 9 &amp; 10. </td> </tr>
+        <tr> <td>22 pF ceramic capacitor</td> <td> Between pin 9 and GND. Connect to the nearest GND. </td> </tr>
+        <tr> <td>22 pF ceramic capacitor</td> <td> Between pin 10 and GND. Connect to the nearest GND. </td> </tr>
+        <tr> <td>0.1 µF ceramic capacitor</td> <td> Decoupling capacitor connected between pin 7 &amp; 8 (VCC &amp; GND). </td> </tr>
+        <tr> <td>0.1 µF ceramic capacitor</td> <td> Connected between pin 20 &amp; 22. Stabilizes analog readings. </td> </tr>
+        <tr> <td>0.1 µF ceramic capacitor</td> <td> Connected between GND &amp; pin 21. Stabilizes the reference voltage. </td> </tr>
+        <tr> <td>10 µF electrolytic capacitor</td> <td> Connected between GND &amp; 5V. Bulk capacitor. </td> </tr>
+
         <tr> <td>TTL-232R 5V cable</td>
         <td>
             <ul class="ul-list">
@@ -144,6 +149,7 @@ It comes with a gray cable but I don’t like it because you need a breakout boa
         <tr> <td>Solid wire</td> <td>Use solid-core 22 AWG wire for a good fit on the breadboard.</td> </tr>
         <tr> <td>USB Mini B cable</td> <td>Connected to the programmer and computer.</td> </tr>
     </table>
+
 </div>
 <p><br /></p>
 
