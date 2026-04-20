@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2026-03-01T16:02:54+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="previous-next-navbar">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2026-04-20T17:22:52+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="previous-next-navbar">
     <div><a href="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/">Previous</a></div>
     <div></div>
 </div>
@@ -391,6 +391,33 @@ It’s possible to program AVR-C directly on the board <a href="https://blog.spa
 
 <p>But instead of using it, we will be putting the ATmega328P directly on a breadboard and upload the code using an external programmer.
 Most of the information I learned to make this post is from a video series made by one of the best AVR-C / electronics YouTube channels: <a href="https://youtu.be/9ADxPRjZI4Q?si=RwZNeW9FpwtDTmXk" target="_blank">Human HardDrive</a>.</p>
+
+<p><br /></p>
+
+<hr />
+<p><br /></p>
+<table style="width:100%; border-collapse:collapse; border:none;">
+  <tr>
+
+    <td style="vertical-align:top; padding-right:15px; width:65%; border:none;">
+      <p>
+        <strong>As a side note, if you want to learn soldering:</strong><br />
+        I built a small 555 timer LED fading circuit as a simple soldering practice project.<br />
+        <br />
+        <a href="https://www.ebay.ca/itm/117148934803">You can check it out here</a>
+      </p>
+    </td>
+
+    <td style="vertical-align:top; width:35%; text-align:right; border:none;">
+    <a href="https://www.ebay.ca/itm/117148934803">
+    <img src="../assets/images/adc-serial-atmega328-avr-c/fadingLED_PCB_assembled.jpg" alt="555 Timer LED Fading Circuit" style="max-width:35%; height:auto; border-radius:6px; border:none;" />
+    </a>
+    </td>
+
+  </tr>
+</table>
+<hr />
+<p><br /></p>
 
 <h2 id="sparkfun-pocket-avr-programmer">SparkFun Pocket AVR Programmer</h2>
 
