@@ -26,15 +26,15 @@ li {
 }
 
 a {
-  color: #6397db;
+  color: #6d9bd8;
 }
 
 a:visited {
-  color: #6397db;
+  color: #6d9bd8;
 }
 
 a:hover {
-  color: #4387e0;
+  color: #6d9bd8;
   text-decoration: underline;
 }
 
