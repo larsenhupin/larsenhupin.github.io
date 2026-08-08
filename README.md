@@ -1,5 +1,9 @@
 # Blog Sparkland
 --------------
+### Deploy:
+rm -r *
+git restore CNAME
+cp -r ../BlogSparkland/_site/* .
 
 
 ### Commands:
