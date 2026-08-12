@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2026-08-09T05:30:56+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Learn soldering electronics by practicing</title><link href="https://blog.sparkland.ca/learn-soldering-electronics-by-practicing/" rel="alternate" type="text/html" title="Learn soldering electronics by practicing" /><published>2026-08-07T20:00:00+00:00</published><updated>2026-08-07T20:00:00+00:00</updated><id>https://blog.sparkland.ca/learn-soldering-electronics-by-practicing</id><content type="html" xml:base="https://blog.sparkland.ca/learn-soldering-electronics-by-practicing/"><![CDATA[<div class="previous-next-navbar">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2026-08-12T15:21:05+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Learn soldering electronics by practicing</title><link href="https://blog.sparkland.ca/learn-soldering-electronics-by-practicing/" rel="alternate" type="text/html" title="Learn soldering electronics by practicing" /><published>2026-08-07T20:00:00+00:00</published><updated>2026-08-07T20:00:00+00:00</updated><id>https://blog.sparkland.ca/learn-soldering-electronics-by-practicing</id><content type="html" xml:base="https://blog.sparkland.ca/learn-soldering-electronics-by-practicing/"><![CDATA[<div class="previous-next-navbar">
     <div><a href="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/">Previous</a></div>
 </div>
 
@@ -95,7 +95,7 @@ It even work with SMD.</p>
 <p>The first spool I got was thick 0.5mm solder. But thin wires it really where the magic reside.</p>
 
 <p>Currently, I’m using 0.015 inch (0.38 mm) Sn60/Pb40.
-For safety reasons and ROTH compliance, non lead is recommended but I’m use to lead solder and it’s hard to switch.</p>
+For safety reasons and RoHS compliance, non lead is recommended but I’m use to lead solder and it’s hard to switch.</p>
 
 <p><img src="../assets/images/2026-02-12-A-practical-guide-to-soldering/solder.jpg" alt="" width="200" /></p>
 
