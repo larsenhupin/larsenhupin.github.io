@@ -9,15 +9,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Previous Next" />
 <meta property="og:description" content="Previous Next" />
-<link rel="canonical" href="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/" />
-<meta property="og:url" content="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/" />
+<link rel="canonical" href="http://localhost:4000/adc-serial-atmega328-avr-c/" />
+<meta property="og:url" content="http://localhost:4000/adc-serial-atmega328-avr-c/" />
 <meta property="og:site_name" content="Sparkland Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-08-18T04:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="ADC and UART on ATmega328P in AVR-C" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-18T04:00:00+00:00","datePublished":"2025-08-18T04:00:00+00:00","description":"Previous Next","headline":"ADC and UART on ATmega328P in AVR-C","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.sparkland.ca/adc-serial-atmega328-avr-c/"},"url":"https://blog.sparkland.ca/adc-serial-atmega328-avr-c/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-18T04:00:00+00:00","datePublished":"2025-08-18T04:00:00+00:00","description":"Previous Next","headline":"ADC and UART on ATmega328P in AVR-C","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/adc-serial-atmega328-avr-c/"},"url":"http://localhost:4000/adc-serial-atmega328-avr-c/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css">
   <link rel="stylesheet" href="/assets/css/style.css">
@@ -36,7 +36,7 @@
     data-sample-rate="0.5" 
     data-mask-level="moderate" 
     data-max-duration="300000">
-  </script><link type="application/atom+xml" rel="alternate" href="https://blog.sparkland.ca/feed.xml" title="Sparkland Blog" /></head>
+  </script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Sparkland Blog" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">Sparkland Blog</a><nav class="site-nav">
@@ -174,19 +174,19 @@ Pliers: <a href="https://amzn.to/48Ii1w2">https://amzn.to/48Ii1w2 </a></p>
         <tr> <td>ATmega328P MCU</td> 
         <td>
             <ul class="ul-list">
-                <li>Pin 1 (RESET) → RST on programmer</li>
-                <li>Pin 2 (RXD) → TXD (orange) on TTL-232R</li>
-                <li>Pin 3 (TXD) → RXD (yellow) on TTL-232R</li>
-                <li>Pin 7 (VCC) → Power supply 5V</li>
-                <li>Pin 8 (GND) → GND</li>
-                <li>Pin 9 (XTAL1) → Ceramic capacitor 22 pF</li>
-                <li>Pin 10 (XTAL2) → Ceramic capacitor 22 pF</li>
-                <li>Pin 17 (MOSI) → MOSI on programmer</li>
-                <li>Pin 18 (MISO) → MISO on programmer</li>
-                <li>Pin 19 (SCK) → Clock on programmer</li>
-                <li>Pin 20 (AVCC) → Power supply (5V)</li>
-                <li>Pin 23 (ADC0) → LED</li>
-                <li>Pin 24 (ADC1) → GND</li>
+                <li>Pin 1 (RESET) -&gt; RST on programmer</li>
+                <li>Pin 2 (RXD) -&gt; TXD (orange) on TTL-232R</li>
+                <li>Pin 3 (TXD) -&gt; RXD (yellow) on TTL-232R</li>
+                <li>Pin 7 (VCC) -&gt; Power supply 5V</li>
+                <li>Pin 8 (GND) -&gt; GND</li>
+                <li>Pin 9 (XTAL1) -&gt; Ceramic capacitor 22 pF</li>
+                <li>Pin 10 (XTAL2) -&gt; Ceramic capacitor 22 pF</li>
+                <li>Pin 17 (MOSI) -&gt; MOSI on programmer</li>
+                <li>Pin 18 (MISO) -&gt; MISO on programmer</li>
+                <li>Pin 19 (SCK) -&gt; Clock on programmer</li>
+                <li>Pin 20 (AVCC) -&gt; Power supply (5V)</li>
+                <li>Pin 23 (ADC0) -&gt; LED</li>
+                <li>Pin 24 (ADC1) -&gt; GND</li>
             </ul>
         </td>
         </tr>
@@ -202,12 +202,12 @@ Pliers: <a href="https://amzn.to/48Ii1w2">https://amzn.to/48Ii1w2 </a></p>
         <tr> <td>TTL-232R 5V cable</td>
         <td>
             <ul class="ul-list">
-                <li>GND (black) → GND</li>
-                <li>CTS (brown) → Not connected</li>
-                <li>VCC (red) → Power supply</li>
-                <li>TXD (orange) → Pin 2 RXD</li>
-                <li>RXD (yellow) → Pin 3 TXD</li>
-                <li>RTS (green) → Not connected</li>
+                <li>GND (black) -&gt; GND</li>
+                <li>CTS (brown) -&gt; Not connected</li>
+                <li>VCC (red) -&gt; Power supply</li>
+                <li>TXD (orange) -&gt; Pin 2 RXD</li>
+                <li>RXD (yellow) -&gt; Pin 3 TXD</li>
+                <li>RTS (green) -&gt; Not connected</li>
             </ul>
         </td>
         </tr>

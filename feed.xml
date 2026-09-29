@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.sparkland.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.sparkland.ca/" rel="alternate" type="text/html" /><updated>2026-08-12T15:21:05+00:00</updated><id>https://blog.sparkland.ca/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Learn soldering electronics by practicing</title><link href="https://blog.sparkland.ca/learn-soldering-electronics-by-practicing/" rel="alternate" type="text/html" title="Learn soldering electronics by practicing" /><published>2026-08-07T20:00:00+00:00</published><updated>2026-08-07T20:00:00+00:00</updated><id>https://blog.sparkland.ca/learn-soldering-electronics-by-practicing</id><content type="html" xml:base="https://blog.sparkland.ca/learn-soldering-electronics-by-practicing/"><![CDATA[<div class="previous-next-navbar">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-09-29T22:47:13+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Sparkland Blog</title><subtitle>Blog about various projects</subtitle><entry><title type="html">Learn soldering electronics by practicing</title><link href="http://localhost:4000/learn-soldering-electronics-by-practicing/" rel="alternate" type="text/html" title="Learn soldering electronics by practicing" /><published>2026-08-07T20:00:00+00:00</published><updated>2026-08-07T20:00:00+00:00</updated><id>http://localhost:4000/learn-soldering-electronics-by-practicing</id><content type="html" xml:base="http://localhost:4000/learn-soldering-electronics-by-practicing/"><![CDATA[<div class="previous-next-navbar">
     <div><a href="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/">Previous</a></div>
 </div>
 
@@ -159,7 +159,7 @@ Buy a decent third hand it’s really important to hold PCBs and to solder wires
 <video muted="" controls="" width="400">
   <source src="../assets/images/2026-02-12-A-practical-guide-to-soldering/flashing_circuits_2.mp4" type="video/mp4" />
 </video>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous]]></summary></entry><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="previous-next-navbar">
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous]]></summary></entry><entry><title type="html">Serial Graph in C++ using Dear ImGUI on Linux</title><link href="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/" rel="alternate" type="text/html" title="Serial Graph in C++ using Dear ImGUI on Linux" /><published>2025-11-26T04:22:04+00:00</published><updated>2025-11-26T04:22:04+00:00</updated><id>http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux</id><content type="html" xml:base="http://localhost:4000/serial-graph-in-cplusplus-using-dear-imgui-on-linux/"><![CDATA[<div class="previous-next-navbar">
     <div><a href="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/">Previous</a></div>
     <div><a href="https://blog.sparkland.ca/learn-soldering-electronics-by-practicing/">Next</a></div>
 </div>
@@ -533,7 +533,7 @@ clean:
 
 <p>Full code: <a href="https://github.com/larsenhupin/SerialGraph" target="_blank">https://github.com/larsenhupin/SerialGraph</a><br />
 Dear ImGUI: <a href="https://github.com/ocornut/imgui" target="_blank">https://github.com/ocornut/imgui</a>
-<br /></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">ADC and UART on ATmega328P in AVR-C</title><link href="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/" rel="alternate" type="text/html" title="ADC and UART on ATmega328P in AVR-C" /><published>2025-08-18T04:00:00+00:00</published><updated>2025-08-18T04:00:00+00:00</updated><id>https://blog.sparkland.ca/adc-serial-atmega328-avr-c</id><content type="html" xml:base="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/"><![CDATA[<div class="previous-next-navbar">
+<br /></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">ADC and UART on ATmega328P in AVR-C</title><link href="http://localhost:4000/adc-serial-atmega328-avr-c/" rel="alternate" type="text/html" title="ADC and UART on ATmega328P in AVR-C" /><published>2025-08-18T04:00:00+00:00</published><updated>2025-08-18T04:00:00+00:00</updated><id>http://localhost:4000/adc-serial-atmega328-avr-c</id><content type="html" xml:base="http://localhost:4000/adc-serial-atmega328-avr-c/"><![CDATA[<div class="previous-next-navbar">
     <div><a href="https://blog.sparkland.ca/fading-leds-using-555-timer/">Previous</a></div>
     <div><a href="https://blog.sparkland.ca/serial-graph-in-cplusplus-using-dear-imgui-on-linux/">Next</a></div>
 </div>
@@ -643,19 +643,19 @@ Pliers: <a href="https://amzn.to/48Ii1w2">https://amzn.to/48Ii1w2 </a></p>
         <tr> <td>ATmega328P MCU</td> 
         <td>
             <ul class="ul-list">
-                <li>Pin 1 (RESET) → RST on programmer</li>
-                <li>Pin 2 (RXD) → TXD (orange) on TTL-232R</li>
-                <li>Pin 3 (TXD) → RXD (yellow) on TTL-232R</li>
-                <li>Pin 7 (VCC) → Power supply 5V</li>
-                <li>Pin 8 (GND) → GND</li>
-                <li>Pin 9 (XTAL1) → Ceramic capacitor 22 pF</li>
-                <li>Pin 10 (XTAL2) → Ceramic capacitor 22 pF</li>
-                <li>Pin 17 (MOSI) → MOSI on programmer</li>
-                <li>Pin 18 (MISO) → MISO on programmer</li>
-                <li>Pin 19 (SCK) → Clock on programmer</li>
-                <li>Pin 20 (AVCC) → Power supply (5V)</li>
-                <li>Pin 23 (ADC0) → LED</li>
-                <li>Pin 24 (ADC1) → GND</li>
+                <li>Pin 1 (RESET) -&gt; RST on programmer</li>
+                <li>Pin 2 (RXD) -&gt; TXD (orange) on TTL-232R</li>
+                <li>Pin 3 (TXD) -&gt; RXD (yellow) on TTL-232R</li>
+                <li>Pin 7 (VCC) -&gt; Power supply 5V</li>
+                <li>Pin 8 (GND) -&gt; GND</li>
+                <li>Pin 9 (XTAL1) -&gt; Ceramic capacitor 22 pF</li>
+                <li>Pin 10 (XTAL2) -&gt; Ceramic capacitor 22 pF</li>
+                <li>Pin 17 (MOSI) -&gt; MOSI on programmer</li>
+                <li>Pin 18 (MISO) -&gt; MISO on programmer</li>
+                <li>Pin 19 (SCK) -&gt; Clock on programmer</li>
+                <li>Pin 20 (AVCC) -&gt; Power supply (5V)</li>
+                <li>Pin 23 (ADC0) -&gt; LED</li>
+                <li>Pin 24 (ADC1) -&gt; GND</li>
             </ul>
         </td>
         </tr>
@@ -671,12 +671,12 @@ Pliers: <a href="https://amzn.to/48Ii1w2">https://amzn.to/48Ii1w2 </a></p>
         <tr> <td>TTL-232R 5V cable</td>
         <td>
             <ul class="ul-list">
-                <li>GND (black) → GND</li>
-                <li>CTS (brown) → Not connected</li>
-                <li>VCC (red) → Power supply</li>
-                <li>TXD (orange) → Pin 2 RXD</li>
-                <li>RXD (yellow) → Pin 3 TXD</li>
-                <li>RTS (green) → Not connected</li>
+                <li>GND (black) -&gt; GND</li>
+                <li>CTS (brown) -&gt; Not connected</li>
+                <li>VCC (red) -&gt; Power supply</li>
+                <li>TXD (orange) -&gt; Pin 2 RXD</li>
+                <li>RXD (yellow) -&gt; Pin 3 TXD</li>
+                <li>RTS (green) -&gt; Not connected</li>
             </ul>
         </td>
         </tr>
@@ -1074,7 +1074,7 @@ clean:
     <span class="k">return</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><br /></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">A Fading LEDs circuit using 555 Timer on Breadboard</title><link href="https://blog.sparkland.ca/fading-leds-using-555-timer/" rel="alternate" type="text/html" title="A Fading LEDs circuit using 555 Timer on Breadboard" /><published>2025-08-03T04:00:00+00:00</published><updated>2025-08-03T04:00:00+00:00</updated><id>https://blog.sparkland.ca/fading-leds-using-555-timer</id><content type="html" xml:base="https://blog.sparkland.ca/fading-leds-using-555-timer/"><![CDATA[<div class="previous-next-navbar">
+<p><br /></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">A Fading LEDs circuit using 555 Timer on Breadboard</title><link href="http://localhost:4000/fading-leds-using-555-timer/" rel="alternate" type="text/html" title="A Fading LEDs circuit using 555 Timer on Breadboard" /><published>2025-08-03T04:00:00+00:00</published><updated>2025-08-03T04:00:00+00:00</updated><id>http://localhost:4000/fading-leds-using-555-timer</id><content type="html" xml:base="http://localhost:4000/fading-leds-using-555-timer/"><![CDATA[<div class="previous-next-navbar">
     <div><a href="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/">Previous</a></div>
     <div><a href="https://blog.sparkland.ca/adc-serial-atmega328-avr-c/">Next</a></div>
 </div>
@@ -1151,7 +1151,7 @@ The multimeter is useful to capture voltage in your circuit and it can also be u
 
 <h2 id="resource">Resource</h2>
 
-<p><a href="https://youtu.be/kRlSFm519Bo?si=iZPP58k-VTZORQVS" target="_blank">Ben Eater - Astable 555 timer</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">Home Server with Proxmox Virtualization</title><link href="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/" rel="alternate" type="text/html" title="Home Server with Proxmox Virtualization" /><published>2025-06-01T16:00:00+00:00</published><updated>2025-06-01T16:00:00+00:00</updated><id>https://blog.sparkland.ca/home-server-with-proxmox-virtualization</id><content type="html" xml:base="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/"><![CDATA[<div class="previous-next-navbar">
+<p><a href="https://youtu.be/kRlSFm519Bo?si=iZPP58k-VTZORQVS" target="_blank">Ben Eater - Astable 555 timer</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">Home Server with Proxmox Virtualization</title><link href="http://localhost:4000/home-server-with-proxmox-virtualization/" rel="alternate" type="text/html" title="Home Server with Proxmox Virtualization" /><published>2025-06-01T16:00:00+00:00</published><updated>2025-06-01T16:00:00+00:00</updated><id>http://localhost:4000/home-server-with-proxmox-virtualization</id><content type="html" xml:base="http://localhost:4000/home-server-with-proxmox-virtualization/"><![CDATA[<div class="previous-next-navbar">
     <div><a href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/">Previous</a></div>
     <div><a href="https://blog.sparkland.ca/fading-leds-using-555-timer/">Next</a></div>
 </div>
@@ -1166,7 +1166,21 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
   <li>Airflow is not optimal</li>
 </ul>
 
-<p>I decided to put the project on hold until… <a href="https://youtu.be/Jr5MjhgPz_c?si=h1uplTj6O9L81UQD" target="_blank">Wolfgang’s Channel dropped this video</a><br /><br /></p>
+<p>I decided to put the project on hold until… <a href="https://youtu.be/Jr5MjhgPz_c?si=h1uplTj6O9L81UQD" target="_blank">Wolfgang’s Channel dropped this video</a>   <br /></p>
+
+<h3 id="specification">Specification</h3>
+
+<table class="adc-serial-atmega-table">
+    <tr> <th>Component</th> <th>Description</th> </tr>
+    <tr> <td>Case</td> <td>Sagittarious 8-Bay</td> </tr>
+    <tr> <td>Motherboard</td> <td> ASRock X570M Pro4 </td> </tr>
+    <tr> <td>CPU</td> <td> AMD Ryzen 7 PRO 4750G </td> </tr>
+    <tr> <td>RAM</td> <td> 2 x Kingston ECC 2666MHz 16GB DDR4 (KSM26ED8/16HD) </td> </tr>
+    <tr> <td>Boot drive</td> <td> 2 x M.2 NVMe 1T SSD Crucial P3 </td> </tr>
+    <tr> <td>Hard drive</td> <td> 2 x Western Digital 6TB WD Red Plus </td> </tr>
+    <tr> <td>PSU</td> <td> Corsair HX 520W </td> </tr>
+    <tr> <td>Fans</td> <td> ARCTIC P12 PWM (case fans), Thermalright AXP90-X36 (CPU fan). </td> </tr>
+</table>
 
 <h3 id="case">Case</h3>
 
@@ -1183,9 +1197,9 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 <p>If budget is a concern, you can choose a cheaper motherboard like the <strong>ASRock B550M Pro4</strong> but I decided to pay almost double for this one because of three key features:</p>
 
 <ul>
-  <li>8 native SATA ports – no need for a SATA PCIe expansion card</li>
-  <li>2 Hyper M.2 sockets – perfect for NVMe boot drive live replication with ZFS</li>
-  <li>10-phase power design VRM – better when upgrading to a 16-core CPU<br /></li>
+  <li>8 native SATA ports, no need for a SATA PCIe expansion card.</li>
+  <li>2 Hyper M.2 sockets, perfect for NVMe boot drive live replication with ZFS.</li>
+  <li>10-phase power design VRM, better when upgrading to a 16-core CPU.<br /></li>
 </ul>
 
 <p><a href="../assets/files/X570M Pro4.pdf" target="_blank">
@@ -1222,13 +1236,13 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 
 <p><strong>Western Digital 6TB WD Red Plus</strong></p>
 
-<p>Mechanical hard drives are cheaper than SSDs. If you plan to use ZFS, it’s mandatory to get CMR drives, not SMR—the latter would be too slow. This is one of the reasons why the NAS community was angry at Western Digital when they changed the Red series to SMR and were not upfront about it. Now, only the Red Plus and Red Pro are CMR.</p>
+<p>Mechanical hard drives are cheaper than SSDs. If you plan to use ZFS, it’s mandatory to get CMR drives, not SMR, the latter would be too slow. This is one of the reasons why the NAS community was angry at Western Digital when they changed the Red series to SMR and were not upfront about it. Now, only the Red Plus and Red Pro are CMR.</p>
 
 <p>I started by looking at the <strong>Seagate IronWolf</strong> and other models from the same company. I read a lot of comments about them being loud. The server is sitting in my living room, so noise is an important factor. There’s a lot of information on the internet, here’s what I gathered:</p>
 
 <ul>
-  <li>The bigger the drive, the more noise it makes. While it’s not always true, it’s a good rule of thumb</li>
-  <li>Helium-filled drives are less noisy but are usually only available in higher capacities</li>
+  <li>The bigger capacity is the drive, the more noise it makes. While it’s not always true, it’s a good rule of thumb.</li>
+  <li>Helium-filled drives are less noisy but are usually only available in higher capacities.</li>
 </ul>
 
 <p>I went with the <strong>WD 6TB Red Plus</strong>, and I’m really happy with them. They make almost no noise when not in use. When writing files, there’s a little bit of noise, but it’s barely noticeable from 6 feet away.  I can read and write at 115MB/s which means the bottleneck right now is my network speed.</p>
@@ -1265,14 +1279,14 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
 
 <h3 id="cloud">Cloud</h3>
 
-<p>But why not use the cloud? There’s a long-running debate between cloud and on-premises—and it’s getting old. Both are important. I use the cloud when I need to deploy in production. My build is intended to let me run as many VMs as I want. It’s a testbench. I mostly work with Linux servers and I like to compartmentalize my services into separate virtual machines that communicate with each other, nothing feels better than <em>home</em>.<br /><br /></p>
+<p>But why not use the cloud? There’s a long-running debate between cloud and on-premises, and it’s getting old. Both are important. I use the cloud when I need to deploy in production. My build is intended to let me run as many VMs as I want. It’s a testbench. I mostly work with Linux servers and I like to compartmentalize my services into separate virtual machines that communicate with each other, nothing feels better than <em>home</em>.<br /><br /></p>
 
 <h3 id="backup">Backup</h3>
 <p>Live replication is not a backup. For sufficient protection against data loss, you need at least one backup at an offsite location. I have yet to decide which strategy I’m going to use but here are the options I’m considering:</p>
 
 <ul>
-  <li>Amazon S3 Glacier – A good, low-cost cloud solution for long-term storage</li>
-  <li>Build another server – Possibly using the Jonsbo N3 case, which I would place somewhere else, like at a family member house
+  <li>Amazon S3 Glacier: A good, low-cost cloud solution for long-term storage.</li>
+  <li>Build another server: Possibly using the Jonsbo N3 case, which I would place somewhere else, like at a family member house.
 <br /><br /></li>
 </ul>
 
@@ -1308,7 +1322,7 @@ that will serve as both a NAS and a virtualization server. My eyes were lurking 
   <li>Surveillance</li>
   <li>Next-cloud
 <br /></li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">Simple Arduino Blink LED AVC-C on Linux</title><link href="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/" rel="alternate" type="text/html" title="Simple Arduino Blink LED AVC-C on Linux" /><published>2024-08-17T04:22:04+00:00</published><updated>2024-08-17T04:22:04+00:00</updated><id>https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux</id><content type="html" xml:base="https://blog.sparkland.ca/simple-arduino-blink-led-avr-c-on-linux/"><![CDATA[<div class="previous-next-navbar">
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Previous Next]]></summary></entry><entry><title type="html">Simple Arduino Blink LED AVC-C on Linux</title><link href="http://localhost:4000/simple-arduino-blink-led-avr-c-on-linux/" rel="alternate" type="text/html" title="Simple Arduino Blink LED AVC-C on Linux" /><published>2024-08-17T04:22:04+00:00</published><updated>2024-08-17T04:22:04+00:00</updated><id>http://localhost:4000/simple-arduino-blink-led-avr-c-on-linux</id><content type="html" xml:base="http://localhost:4000/simple-arduino-blink-led-avr-c-on-linux/"><![CDATA[<div class="previous-next-navbar">
     <div></div>
     <div><a href="https://blog.sparkland.ca/home-server-with-proxmox-virtualization/">Next</a></div>
 </div>
